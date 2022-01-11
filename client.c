@@ -153,3 +153,18 @@ int main (int argc, char *argv[])
     close(connection_socket_descriptor);
     return 0;
 }
+
+/* CONFIGURE FILE
+cmake_minimum_required(VERSION 3.21)
+project(client C)
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_FLAGS -pthread)
+
+find_package(Threads REQUIRED)
+
+add_executable(client main.c)
+target_link_libraries(client pthread)
+
+
+*/
