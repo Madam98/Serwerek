@@ -16,10 +16,6 @@ public class Main extends Application {
     private Parent root;
     private Client client;
 
-    public void initialize(){
-
-    }
-
     @Override
     public void start(Stage startingStage) throws IOException {
         client = new Client();

@@ -7,15 +7,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="634.0" prefWidth="923.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.skclient.controllers.MenuController">
+<VBox alignment="TOP_CENTER" prefHeight="634.0" prefWidth="923.0" spacing="20.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.client.skclient.controllers.EditorController">
     <MenuBar>
       <menus>
          <Menu mnemonicParsing="false" text="Plik">
            <items>
-             <MenuItem id="newFile" mnemonicParsing="false" onAction="#onNewFileClick" text="Nowy" />
-               <MenuItem id="openFile" mnemonicParsing="false" onAction="#onOpenFileClick" text="Otwórz" />
-               <MenuItem id="saveFileAs" mnemonicParsing="false" onAction="#onSaveFileAsClick" text="Zapisz jako" />
-               <MenuItem id="deleteFile" mnemonicParsing="false" onAction="#onDeleteFileClick" text="Usuń" disable="true" />
+               <MenuItem mnemonicParsing="false" onAction="#onSaveFileAsClick" text="Zapisz jako" />
+               <MenuItem mnemonicParsing="false" onAction="#onDeleteFileClick" text="Usuń" />
+               <MenuItem mnemonicParsing="false" onAction="#onCloseFileClick" text="Zamknij" />
            </items>
          </Menu>
          <Menu mnemonicParsing="false" text="Udostępnianie">
@@ -25,7 +24,7 @@
            </items>
          </Menu>
       </menus></MenuBar>
-    <TextArea fx:id="docText" VBox.vgrow="ALWAYS">
+    <TextArea fx:id="mainTextArea" VBox.vgrow="ALWAYS">
       <VBox.margin>
          <Insets bottom="20.0" left="10.0" right="10.0" />
       </VBox.margin>

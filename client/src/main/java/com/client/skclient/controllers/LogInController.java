@@ -21,7 +21,6 @@ public class LogInController {
     private Parent root;
 
     public void initialize(Client client){
-        System.out.print("Initializing...\n");
         this.client = client;
     }
 

@@ -11,15 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="634.0" prefWidth="923.0" spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.skclient.controllers.MainController">
+<VBox prefHeight="634.0" prefWidth="923.0" spacing="10.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.client.skclient.controllers.MainController">
     <MenuBar>
       <menus>
          <Menu mnemonicParsing="false" text="Plik">
            <items>
              <MenuItem id="newFile" mnemonicParsing="false" onAction="#onNewFileClick" text="Nowy" />
                <MenuItem id="openFile" mnemonicParsing="false" onAction="#onOpenFileClick" text="Otwórz" />
-               <MenuItem id="saveFileAs" mnemonicParsing="false" onAction="#onSaveFileAsClick" text="Zapisz jako" />
-               <MenuItem id="deleteFile" disable="true" mnemonicParsing="false" onAction="#onDeleteFileClick" text="Usuń" />
            </items>
          </Menu>
          <Menu mnemonicParsing="false" text="Udostępnianie">
@@ -30,9 +28,9 @@
          </Menu>
       </menus></MenuBar>
    <Label text="Twoje pliki">
-      <font>
-         <Font size="16.0" />
-      </font>
+<!--      <font>-->
+<!--         <Font size="16.0" />-->
+<!--      </font>-->
       <VBox.margin>
          <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
       </VBox.margin>
@@ -60,9 +58,9 @@
    <HBox alignment="CENTER_RIGHT" prefHeight="60.0" spacing="30.0">
       <children>
          <Label fx:id="loggedInUserLabel" text="Zalogowano jako: " textFill="#323232">
-            <font>
-               <Font size="14.0" />
-            </font>
+<!--            <font>-->
+<!--               <Font size="14.0" />-->
+<!--            </font>-->
          </Label>
          <Button mnemonicParsing="false" onAction="#onLogOutButtonClick" text="wyloguj" />
       </children>
