@@ -1,0 +1,72 @@
+#pragma once
+
+#include <Headers/headers/headers.h>
+#include <Headers/data/variables.h>
+#include <Headers/data/structs.h>
+
+#ifndef SERWER_CREATEFOLDER_H
+#define SERWER_CREATEFOLDER_H
+
+
+void connectUser(char* buf, struct thread_data_t t_data_ptr){
+    printf("\n");
+    printBreak();
+    printf("Nazwa uzytkownika: %s\n", buf);
+
+    char* path = t_data_ptr.path;
+    //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
+    //strcpy(path, t_data_ptr.path);
+
+    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
+    //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
+    createFolder(path, buf);
+    printf("Sciecka utworzonego folderu: \n\t%s\n", path);
+    printBreak();
+    printf("\n");
+}
+
+int ExistsFolder(char* path){
+    DIR *dir = opendir(path);
+    if (!(dir)){
+        printf("Folder nie istnieje\n");
+        return 1;
+    }
+    return 0;
+}
+
+void createFolder(char* path, char* dirname) {
+    //printf("\tFolder: %s\n", getenv("PWD"));
+    //printf("\tWykonywany plik: %s/%s\n", getenv("PWD"), __FILE__);
+
+    //char *dirname = "DOCUMENTS"; //<--- tworz ten plik zawsze gdy dziala serwer o podanej nazwie
+    //DIR *dir = opendir(dirname);
+
+    //char* path_temp;
+    //strcpy(path_temp, path);
+
+
+    char* folder_sciezka = (char*)malloc(strlen(dirname)+1);
+    strcat(path, "/");
+    strcpy(folder_sciezka, dirname);
+    strcat(path, folder_sciezka);
+
+    if (ExistsFolder(path)) {
+        //strcat(path, "/");
+        printf("Tworzenie folderu\n");
+        mkdir(path, 0777);
+    }
+
+    //pod koniec wywolania funkcji znajdujemy sie w folderze DOCUMENTS
+}
+
+void folderInfo(char* path, char* info){
+    printBreak();
+    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
+    createFolder(path, dirname);
+    printf("Sciezka utworzonego folderu: \n\t%s\n", path);
+    printBreak();
+    printf("\n");
+
+}
+
+#endif /* !SERWER_CREATEFOLDER_H */
