@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.*;
+import java.net.SocketTimeoutException;
 
 public class LogInController {
 
@@ -20,22 +21,38 @@ public class LogInController {
     private Client client;
     private Parent root;
 
-    public void initialize(Client client){
+    @FXML
+    private Label warningLabel;
+
+    @FXML
+    private TextField serverAddressTF;
+
+    @FXML
+    private TextField serverPortTF;
+
+    @FXML
+    private TextField usernameTF;
+
+    public void initialize(Client client, Stage stage){
         this.client = client;
+        this.stage = stage;
     }
 
     private Boolean connectToServer(String username) {
         try {
+            String serverAddress = serverAddressTF.getText().trim();
+            String serverPort = serverPortTF.getText().trim();
+
             // połącz
-            client.connect("127.0.0.1", 1234, username);
+            client.connect(serverAddress, serverPort);
+//            client.connect(serverAddress, serverPort, username);
 
             // wyślij wiadomość testową
             OutputStream os = client.getConnectionSocket().getOutputStream();
-            PrintWriter writer = new PrintWriter(os, true);
-            writer.println("Dzień dobry");
             return true;
 
-        } catch(Exception ConnectException) {
+        } catch(IOException ex) {
+            System.out.print("Nie udało się nawiązać połączenia z serwerem:: " + ex);
             warningLabel.setText("Nie udało się nawiązać połączenia z serwerem.");
             warningLabel.setVisible(true);
             return false;
@@ -47,34 +64,30 @@ public class LogInController {
         root = fxmlLoader.load();
 
         MainController mainController = fxmlLoader.getController();
-        mainController.initialize(client);
+        mainController.initialize(client, stage);
 
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    @FXML
-    private Label warningLabel;
-
-    @FXML
-    private TextField usernameTF;
 
     @FXML
     protected void onLogInButtonClick(ActionEvent actionEvent) throws IOException {
-        String username = usernameTF.getText();
+        warningLabel.setVisible(false);
+        String username = usernameTF.getText().trim();
         if (username.isEmpty()){
             warningLabel.setText("Nazwa użytkownika jest wymagana.");
             warningLabel.setVisible(true);
         }
         else {
+            client.setUsername(username);
             System.out.print("Logowanie użytkownika: " + username + "\n");
-            scene = warningLabel.getScene();
-            stage = (Stage)scene.getWindow();
 
             // połącz z serwerem i przełącz konteks jeśli udało się połączyć
             if (connectToServer(username)) {
-                client.handleConnection();
+                //uruchom wątek nasłuchujący
+                //client.handleConnection();
                 switchContext();
             }
         }

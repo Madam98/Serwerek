@@ -2,6 +2,7 @@ package com.client.skclient;
 
 import java.io.*;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +20,10 @@ public class Client {
     public void Client(){
         connectionSocket = null;
         documents = Collections.emptyList();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<String> getDocuments(){
@@ -41,10 +46,13 @@ public class Client {
         return username;
     }
 
-    public void connect(String host, int port, String username) throws IOException {
-        this.username = username;
+
+    public void connect(String host, String port) throws IOException {
+//    public void connect(String host, String port, String username) throws IOException {
+//        this.username = username;
         InetAddress address = InetAddress.getByName(host);
-        connectionSocket = new Socket(address, port);
+        connectionSocket = new Socket();
+        connectionSocket.connect(new InetSocketAddress(address, Integer.parseInt(port)), 5000);
 
         writer = new PrintWriter(connectionSocket.getOutputStream(), true);
         reader = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));

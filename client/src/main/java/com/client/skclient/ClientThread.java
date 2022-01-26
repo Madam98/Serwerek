@@ -21,7 +21,7 @@ public class ClientThread implements Runnable{
                 String serverMessage = client.getReader().readLine();
                 System.out.print("Serwer: " + serverMessage);
             } catch (IOException e) {
-//                e.printStackTrace();
+//              e.printStackTrace();
                 System.out.print("Połączenie z serwerem zostało przerwane\n");
             }
 

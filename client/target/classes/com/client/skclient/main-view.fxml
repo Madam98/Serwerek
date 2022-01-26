@@ -28,9 +28,6 @@
          </Menu>
       </menus></MenuBar>
    <Label text="Twoje pliki">
-<!--      <font>-->
-<!--         <Font size="16.0" />-->
-<!--      </font>-->
       <VBox.margin>
          <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
       </VBox.margin>
@@ -43,24 +40,21 @@
          <Insets />
       </VBox.margin>
       <children>
-         <VBox alignment="CENTER" prefHeight="120.0" prefWidth="110.0" style="-fx-background-color: lightgrey;">
-            <children>
-               <Label text="Label" />
-            </children>
-         </VBox>
-         <VBox alignment="CENTER" prefHeight="120.0" prefWidth="110.0" style="-fx-background-color: lightgrey;">
-            <children>
-               <Label text="Label" />
-            </children>
-         </VBox>
+<!--         <VBox alignment="CENTER" prefHeight="120.0" prefWidth="110.0" style="-fx-background-color: lightgrey;">-->
+<!--            <children>-->
+<!--               <Label text="Label" />-->
+<!--            </children>-->
+<!--         </VBox>-->
+<!--         <VBox alignment="CENTER" prefHeight="120.0" prefWidth="110.0" style="-fx-background-color: lightgrey;">-->
+<!--            <children>-->
+<!--               <Label text="Label" />-->
+<!--            </children>-->
+<!--         </VBox>-->
       </children>
    </TilePane>
    <HBox alignment="CENTER_RIGHT" prefHeight="60.0" spacing="30.0">
       <children>
          <Label fx:id="loggedInUserLabel" text="Zalogowano jako: " textFill="#323232">
-<!--            <font>-->
-<!--               <Font size="14.0" />-->
-<!--            </font>-->
          </Label>
          <Button mnemonicParsing="false" onAction="#onLogOutButtonClick" text="wyloguj" />
       </children>

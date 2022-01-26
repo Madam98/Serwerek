@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
@@ -27,64 +28,119 @@ public class MainController {
     private Stage stage;
     private Parent root;
     private Client client;
+    private TextFile file;
 
     @FXML
     private Label loggedInUserLabel;
 
+    @FXML
+    private TextField filenameTF;
 
-    public void initialize(Client client){
+
+    private void switchToNewFile() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-new-file-view.fxml"));
+        root = fxmlLoader.load();
+
+        MainController mainController = fxmlLoader.getController();
+        mainController.initialize(client, stage);
+
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void switchToOpenFile() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-open-file-view.fxml"));
+        root = fxmlLoader.load();
+
+        MainController mainController = fxmlLoader.getController();
+        mainController.initialize(client, stage);
+
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void initialize(Client client, Stage stage){
         this.client = client;
+        this.stage = stage;
+        this.file = new TextFile(client);
         loggedInUserLabel.setText("Zalogowano jako: " + client.getUsername());
         //TODO: ask server for a list of owned/shared(?) files
     }
 
-    private void goToTextEditor(String filename) throws IOException {
-        stage = (Stage)loggedInUserLabel.getScene().getWindow();
-
+    private void goToTextEditor() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("editor-view.fxml"));
         root = fxmlLoader.load();
         EditorController editorController = fxmlLoader.getController();
-        editorController.initialize(client, filename);
+        editorController.initialize(client, file);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    protected void onNewFileClick(ActionEvent actionEvent) throws IOException {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Nowy plik");
-        dialog.setHeaderText("Podaj nazwę pliku");
-        Optional<String> result = dialog.showAndWait();
-        String filename = "";
+    protected void onCreateFileClick(ActionEvent actionEvent) throws IOException {
 
-        if (result.isPresent()) {
-            filename = result.get();
-            TextFile.createFile(filename);
-            goToTextEditor(filename);
-        }
+        String filename = filenameTF.getText();
+        file.setFilename(filename);
+//            file.createFile(filename);
+        file.testCreateFile();
+        goToTextEditor();
+    }
+
+    @FXML
+    protected void onOpenFileButtonClick(ActionEvent actionEvent) throws IOException {
+
+        String filename = filenameTF.getText();
+        file.setFilename(filename);
+        file.openFile();
+        goToTextEditor();
+    }
+
+    @FXML
+    protected void onNewFileClick(ActionEvent actionEvent) throws IOException {
+        switchToNewFile();
+
+        //        TextInputDialog dialog = new TextInputDialog();
+//        dialog.setTitle("Nowy plik");
+//        dialog.setHeaderText("Podaj nazwę pliku");
+//        System.out.print("scene: "+scene+"\n");
+//        System.out.print("stage: "+stage+"\n");
+//        Optional<String> result = dialog.showAndWait();
+//        String filename = "";
+
+//        if (result.isPresent()) {
+//            filename = result.get();
+////            file.createFile(filename);
+//            file.testCreateFile(filename);
+//            goToTextEditor(filename);
+//        }
     }
 
     @FXML
     protected void onOpenFileClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("open-file-view.fxml"));
-
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage newFileWindow = new Stage();
-        newFileWindow.setTitle("Otwórz plik");
-        newFileWindow.setResizable(false);
-        newFileWindow.setScene(scene);
-        newFileWindow.show();
+        switchToOpenFile();
+//        TextInputDialog dialog = new TextInputDialog();
+//        dialog.setTitle("Otwórz plik");
+//        dialog.setHeaderText("Podaj nazwę pliku");
+//        Optional<String> result = dialog.showAndWait();
+//        String filename = "";
+//
+//        if (result.isPresent()) {
+//            filename = result.get();
+//            file.setFilename(filename);
+//            file.openFile();
+//            goToTextEditor();
+//        }
     }
 
     private void goToLogIn() throws IOException {
-        scene = loggedInUserLabel.getScene();
-        stage = (Stage)scene.getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
         root = fxmlLoader.load();
         LogInController logInController = fxmlLoader.getController();
-        logInController.initialize(client);
+        logInController.initialize(client, stage);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -21,11 +21,10 @@ public class Main extends Application {
         client = new Client();
         stage = startingStage;
 
-        // zainicjuj kontroler okna logowania (przekaż instancję klasy Client)
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
         root = fxmlLoader.load();
         LogInController logInController = fxmlLoader.getController();
-        logInController.initialize(client);
+        logInController.initialize(client, stage);
 
         scene = new Scene(root);
         stage.setScene(scene);
@@ -39,3 +38,42 @@ public class Main extends Application {
 
 }
 
+
+//public class Main {
+//
+//        private int j;
+//
+//        public static void main(String[] args) {
+//            com.client.skclient.Main Main = new com.client.skclient.Main();
+//            for(int i=0;i<2;i++){
+//                new Thread(Main.new ShareData1()).start();//Increase
+//                new Thread(Main.new ShareData2()).start();//Reduce
+//            }
+//        }
+//        //Increase
+//        private synchronized void Inc(){
+//            j++;
+//            System.out.println(Thread.currentThread().getName()+" inc "+j);
+//        }
+//        // decrement
+//        private synchronized void Dec(){
+//            j--;
+//            System.out.println(Thread.currentThread().getName()+" dec "+j);
+//        }
+//
+//        class ShareData1 implements Runnable {
+//            public void run() {
+//                for(int i=0;i<5;i++){
+//                    Inc();
+//                }
+//            }
+//        }
+//        class ShareData2 implements Runnable {
+//            public void run() {
+//                for(int i=0;i<5;i++){
+//                    Dec();
+//                }
+//            }
+//        }
+//
+//    }
