@@ -6,5 +6,5 @@ set(CMAKE_CXX_FLAGS -pthread)
 
 find_package(Threads REQUIRED)
 
-add_executable(klient main.c main.c)
+add_executable(klient client.c client.c)
 target_link_libraries(klient pthread)

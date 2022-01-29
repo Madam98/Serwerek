@@ -18,7 +18,6 @@
 
 #include <Headers/file_opearation/createfolder.h>
 
-
 #include <Headers/commands/touch.h>
 #include <Headers/commands/share.h>
 #include <Headers/commands/list.h>
@@ -95,48 +94,83 @@ int main(int argc, char* argv[])
     //https://www.programmerall.com/article/1404354560/
     memset(&events, 0, sizeof(struct epoll_event));
     int epoll_fd = createEpoll();
-
-    char* buf;
     event.events = EPOLLIN|EPOLLET;
+    //event.events = EPOLLIN;
     event.data.fd = server_socket_descriptor;
-
     if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, server_socket_descriptor, &event) == -1){
-        fprintf(stderr, "Failed to add file descriptor to epoll\n");
+        fprintf(stderr, "Blad epoll_ctl ADD dla serwer socket\n");
+        close(epoll_fd);
+        return 1;
+    }
+    event.data.fd = 0;
+    if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, 0, &event) == -1){
+        fprintf(stderr, "Blad epoll_ctl ADD dla klawiatury\n");
         close(epoll_fd);
         return 1;
     }
 
-    /* !!!!!! NARAZIE MAMY JEDEN UTWORZONY WATEK DO SPRAWDZANIA TABLICY AKTYWNYCH UZYTKOWNIKOW (handleArrayOfCLients).
-     * CZY NIE LEPIEJ TWORZYC DWA WATKI NA KAZDEGO KLIENTA? (WTEDY RZECZYWISCIE MOZEMY SPRAWDZAC CZY JEST KLIENT JAK OD DLUZSZEGO CZASU NIE DOSZLO DO PEWNEGO ZDARZENIA)
-    */
-
-    handleArrayOfClients(connection_socket_descriptor, array);
-
-
+    //handleArrayOfClients(connection_socket_descriptor, array);
     //OBSLUGA POLACZEN Z UZYTKOWNIKAMI
     int epoll_des;
     int i;
     while(1){
-
         if((epoll_des = epoll_wait(epoll_fd, events,MAX_EVENTS, -1)) == -1) {
             printf("epoll wait\n");
         }
         printf("NFDS: %d\n", epoll_des);
-        for (i = 0; i < epoll_des; ++i) {
-            if((events[i].events & EPOLLIN) == EPOLLIN) {
-                connection_socket_descriptor = accept(server_socket_descriptor, NULL, NULL);
-                if (connection_socket_descriptor < 0) {
-                    fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
-                    exit(1);
+        if (events[0].data.fd == server_socket_descriptor) {
+            for (i = 0; i < epoll_des; ++i) {
+                if ((events[i].events & EPOLLIN) == EPOLLIN || events[1].data.fd == 0) {
+                    connection_socket_descriptor = accept(server_socket_descriptor, NULL, NULL);
+                        if (connection_socket_descriptor < 0) {
+                            fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
+                            exit(1);
+                        }
+
+                        //INFORMACJA ZWROTNA DO KLIENTA ZE NAWIAZANO POLACZENIE
+                        //---------------------------------------------
+                        //printf("Wysylam wiadomosc zwrotna\n");
+                        //char *buf = "";
+                        //sleep(5);
+                        //send(connection_socket_descriptor, buf, sizeof(buf), MSG_NOSIGNAL);
+                        //---------------------------------------------
+
+                        printBreak();
+                        printf("Operacja ACCEPT dla deskryptora: %d zakonczona sukcesem\n",
+                               connection_socket_descriptor);
+                        printBreak();
+                        printf("\n");
+                        handleConnection(connection_socket_descriptor, t_data_ptr, array, path, epoll_fd, event,
+                                         events);
+                    }
                 }
-                printBreak();
-                printf("Operacja ACCEPT dla deskryptora: %d zakonczona sukcesem\n", connection_socket_descriptor);
-                printBreak();
-                printf("\n");
-                handleConnection(connection_socket_descriptor, t_data_ptr, path, array);
-            }
+
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // zamknięcie gniazda
     close(connection_socket_descriptor);

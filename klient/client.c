@@ -31,22 +31,76 @@ void *ThreadBehavior(void *t_data)
     //dostep do całej struktury: (*th_data).pole
 
 
-    char buf0[12]  = "uzytkownik1";
-    char buf1[30]  = "touch Adam lubi orzeszki";
+    char buf0[12]  = "uzytkownik3";
+    char buf1[30]  = "touch dam lubi orzeszki";
+    char buf2[30]  = "delete borowki";
+    char buf3[40]  = "rename dam lubi orzeszki > Adam";
+    char buf4[5]   = "q";
 
-    sleep(4);
+    char want[4] = "want";
+    char answer[20] = "";
 
     printf("Wysylam nazwe uzytkownika: %s\n", buf0);
-    write((*th_data).server_descriptor, buf0, 12);
+    send((*th_data).server_descriptor, buf0, sizeof(buf0), MSG_CONFIRM);
 
-    sleep(2);
+    while (strlen(answer) == 0) {
+        printf("WCHODZE \n");
+        send((*th_data).server_descriptor, want, sizeof(want), MSG_CONFIRM);
 
-    printf("Wysylam nazwe uzytkownika: %s\n", buf1);
-    write((*th_data).server_descriptor, buf1, 30);
+        recv((*th_data).server_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
+        printf("%s\n", answer);
 
+    }
+
+
+    printf("Wysylam komende uzytkownika: %s\n", buf1);
+    send((*th_data).server_descriptor, buf1, sizeof(buf1), MSG_CONFIRM);
+
+    memset(answer, 0, 6);
+    printf("%s\n", answer);
+    while (strlen(answer) == 0) {
+        printf("WCHODZE \n");
+        send((*th_data).server_descriptor, want, sizeof(want), 0);
+
+        recv((*th_data).server_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
+        printf("%s\n", answer);
+
+    }
+
+    printf("Wysylam komende uzytkownika: %s\n", buf2);
+
+    send((*th_data).server_descriptor, buf2, sizeof(buf2), MSG_CONFIRM);
+
+    memset(answer, 0, 6);
+    while (strlen(answer) == 0) {
+        printf("WCHODZE \n");
+        send((*th_data).server_descriptor, want, sizeof(want), MSG_CONFIRM);
+
+        recv((*th_data).server_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
+        printf("%s\n", answer);
+
+    }
+
+    printf("Wysylam komende uzytkownika: %s\n", buf3);
+    sleep(1);
+    write((*th_data).server_descriptor, buf3, 40);
+
+    memset(answer, 0, 6);
+    while (strlen(answer) == 0) {
+        printf("WCHODZE \n");
+        send((*th_data).server_descriptor, want, sizeof(want), MSG_CONFIRM);
+        sleep(2);
+        recv((*th_data).server_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
+        printf("%s\n", answer);
+        sleep(2);
+    }
+
+    printf("Wysylam komende uzytkownika: %s\n", buf4);
+    write((*th_data).server_descriptor, buf4, 5);
 
 
     //send((*th_data).server_descriptor, (const void*)(*th_data).read, strlen((*th_data).read), 0);
+
 
 
     pthread_exit(NULL);
@@ -136,7 +190,7 @@ int main (int argc, char *argv[])
     struct epoll_event events[MAX_EPOLL_EVENTS];
 
     argv[1] = "127.0.0.1";
-    argv[2] = "1234";
+    argv[2] = "1235";
     argv[3] = "Adam_Example"; //<----user
 
     // if (argc != 3){
@@ -176,19 +230,45 @@ int main (int argc, char *argv[])
         //exit(1);
     }
 
-    printf("Chce odebrac\n");
+    char* buf;
+    //printf("Chce odebrac wiadomosc zwrotna\n");
+    //recv(connection_socket_descriptor, buf, sizeof(buf), MSG_WAITALL);
+    //printf("Odebralem\n");
     //sleep(4);
 
     //printf("Halo\n");
+    char* znaki[40];
+    char want[4] = "want";
+    char answer[20] = "";
     handleConnection(connection_socket_descriptor);
+    while(1){
+        printf("Wpisz cos\n");
 
-    sleep(20);
-    char buf[100];
-    while(1) {
+        scanf("%40s",&znaki);
+
+        while (strlen(answer) == 0) {
+            printf("WCHODZE \n");
+            send(connection_socket_descriptor, want, sizeof(want), MSG_CONFIRM);
+            sleep(2);
+            recv(connection_socket_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
+            printf("%s\n", answer);
+            sleep(2);
+        }
+        memset(answer, 0, 6);
+
+        printf("Wysylam komende uzytkownika: %s\n", znaki);
+        //send(connection_socket_descriptor, znaki, sizeof(znaki), MSG_CONFIRM);
+
+    }
+
+    //handleConnection(connection_socket_descriptor);
+
+
+    /*while(1) {
         recv(connection_socket_descriptor, buf, 12, 0);
         printf("Odebralem wiadomosc\n");
-    }
-    //sleep(10000);
+    }*/
+    sleep(10000);
     close(connect_result);
     return 0;
 }

@@ -11,10 +11,11 @@ void touchCommand(void *t_data, char *arguments[]){
     //komenda na gorze powinna dzialac ale no wlasnie cos jest nie tak. Przejdziemy do podstepu i wykonamy komende linuksowa z przekierowaniem do /dev/null
     //system("pwd >/dev/null 2>&1");
     char buf[100];
-    struct thread_data_t *t_data_ptr = (struct thread_data_t *)t_data;
-    int client_socket =  t_data_ptr->last_connected;
+    struct user_data *user = (struct user_data *)t_data;
 
-    char* result = t_data_ptr->path;
+    int client_socket = user->user_socket;
+
+    char* result = user->path;
 
     char* path = (char*)malloc(strlen(result)+1);
     strcpy(path, result);
@@ -32,7 +33,6 @@ void touchCommand(void *t_data, char *arguments[]){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         perror(1);
     }
-
 
     printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
     printf("Na sockecie:\t\t\t %d\n", client_socket);
@@ -55,7 +55,7 @@ void touchCommand(void *t_data, char *arguments[]){
 
     //printf("%d\n", file_descriptor);
     if (file_descriptor > 0) {
-        printf("Błąd przy próbie tworzenia pliku!\n");
+        printf("Błąd przy próbie TWORZENIA pliku!\n");
         printf("Podany plik o danej nazwie juz istnieje!\n");
         printf("Sciezka istniejacego pliku: \n\t%s\n", path);
     }

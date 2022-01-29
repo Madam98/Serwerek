@@ -21,6 +21,8 @@ struct thread_data_t
     pthread_mutex_t thread_data_mutex;
 };
 
+
+
 struct array_data_clients
 {
     int* descriptor;
@@ -29,6 +31,16 @@ struct array_data_clients
     int counter;
     int first_empty;
 };
+
+struct user_data
+{
+    char* path;
+    int user_socket;
+    int epoll_fd;
+    struct epoll_event epoll_event;
+    struct epoll_event *epoll_events;
+};
+
 
 
 #endif /* !SERWER_STRUCTS_H */

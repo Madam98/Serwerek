@@ -26,11 +26,10 @@ void handleInfo(struct thread_data_t t_data_ptr){
 }
 
 // funkcja obsługująca połączenie z nowym klientem
-void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_data_ptr, char* path, struct array_data_clients *array)
+void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_data_ptr, struct array_data_clients *array, char* path, int epoll_fd, struct epoll_event event, struct epoll_event *events)
 {
     // sprawdzenie, czy jest wolne miejsce w współdzielonej tablicy z numerami połączonych gniazd
     pthread_mutex_lock(&(t_data_ptr->thread_data_mutex));
-
     handleInfo(*t_data_ptr);
     int index = find_empty_cell(t_data_ptr->client_socketfd, t_data_ptr->max_number_of_clients);
 
@@ -39,15 +38,19 @@ void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_
     }
     else{
         t_data_ptr->client_socketfd[index] = connection_socket_descriptor;
-        t_data_ptr->number_of_clients++;
-        t_data_ptr->last_connected = connection_socket_descriptor;
-        t_data_ptr->path = path;
-        array->descriptor[array->counter] = connection_socket_descriptor;
-        array->counter = array->counter + 1;
+
+        struct user_data user;
+        user.user_socket = connection_socket_descriptor;
+        user.path = path;
+        user.epoll_fd = epoll_fd;
+        user.epoll_event = event;
+        user.epoll_events = events;
+
+        //memcpy(&user.epoll_events, events, sizeof(user.epoll_events));
 
         pthread_t thread1;              //<--uchwyt na watek
 
-        int create_result = pthread_create(&thread1, NULL, ThreadBehavior, (void *)t_data_ptr);
+        int create_result = pthread_create(&thread1, NULL, ThreadBehavior, &user);
         createInfo(create_result);
     }
 }

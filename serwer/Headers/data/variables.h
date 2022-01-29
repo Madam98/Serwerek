@@ -3,7 +3,7 @@
 #ifndef SERWER_VARIABLES_H
 #define SERWER_VARIABLES_H
 
-#define SERVER_PORT 1234
+#define SERVER_PORT 1235
 #define QUEUE_SIZE 5
 #define COMMAND_SIZE 6
 

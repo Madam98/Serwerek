@@ -72,8 +72,8 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_klient: phony || CMakeFiles/klient.dir
 
-build CMakeFiles/klient.dir/main.c.o: C_COMPILER__klient_Debug /home/oem/CLionProjects/klient/main.c || cmake_object_order_depends_target_klient
-  DEP_FILE = CMakeFiles/klient.dir/main.c.o.d
+build CMakeFiles/klient.dir/client.c.o: C_COMPILER__klient_Debug /home/oem/CLionProjects/klient/client.c || cmake_object_order_depends_target_klient
+  DEP_FILE = CMakeFiles/klient.dir/client.c.o.d
   FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles/klient.dir
   OBJECT_FILE_DIR = CMakeFiles/klient.dir
@@ -86,7 +86,7 @@ build CMakeFiles/klient.dir/main.c.o: C_COMPILER__klient_Debug /home/oem/CLionPr
 #############################################
 # Link the executable klient
 
-build klient: C_EXECUTABLE_LINKER__klient_Debug CMakeFiles/klient.dir/main.c.o
+build klient: C_EXECUTABLE_LINKER__klient_Debug CMakeFiles/klient.dir/client.c.o
   FLAGS = -g
   LINK_LIBRARIES = -lpthread
   OBJECT_DIR = CMakeFiles/klient.dir
