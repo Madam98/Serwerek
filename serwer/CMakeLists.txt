@@ -26,5 +26,5 @@ add_executable(serwer main.c cmake-build-debug/
         Headers/commands/touch.h
         Headers/commands/share.h
         Headers/commands/list.h
-        Headers/handler/sigsegv.h Headers/connect_operation/handlearrayofclients.h Headers/commands/delete.h Headers/commands/copy.h Headers/commands/rename.h)
+        Headers/handler/sigsegv.h Headers/connect_operation/handlearrayofclients.h Headers/commands/delete.h Headers/commands/copy.h Headers/commands/rename.h Headers/executecommand.h Headers/commands/add.h)
 target_link_libraries(serwer pthread)

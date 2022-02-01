@@ -41,6 +41,19 @@ struct user_data
     struct epoll_event *epoll_events;
 };
 
+struct clients_struct
+{
+    int     client_socket;
+    int     counter;
+    char*   var;
+    char*   name;
+    char*   path;
+};
+
+struct number_map
+{
+    int     number;
+};
 
 
 #endif /* !SERWER_STRUCTS_H */

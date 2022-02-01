@@ -116,7 +116,11 @@ int createEpoll(){
         fprintf(stderr, "Failed to create epoll file descriptor\n");
         exit (-1);
     }
-    printf("Epoll file descriptor: %d\n", epoll_fd);
+    printBreak();
+    printf("Poprawnie stworzono deskryptor EPOLL\n");
+    printf("Epoll deskryptor:\t\t\t %d\n", epoll_fd);
+    printBreak();
+    printf("\n");
     return epoll_fd;
 }
 //-------------------------------------------------------------------------------

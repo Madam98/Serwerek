@@ -15,6 +15,104 @@ void nowConnectedInfo(struct thread_data_t t_data_ptr){
     printBreak();
 }
 
+// funkcja opisująca zachowanie wątku - musi przyjmować argument typu (void *) i zwracać (void *)
+void *KeyFunction(char* user_buffer, int client_socket, char* path){
+
+    char* buf[40];
+    char** tokens;
+    int choose_command;
+    int read_message;
+    int i;
+
+    struct user_data strUser;
+
+    //char* path;
+    //strcpy(path, strUser.path);
+    //ODCZYTAJ WIADOMOSC OD KLIENTA OBSUGIWANEGO PRZEZ TEN WATKEK
+    read_message = read(client_socket, buf, sizeof(buf));
+
+    if (read_message > 0) {
+        printBreak();
+        printf("Odczytane:\t\t\t\t\t %s\n", buf);
+        printf("Na sockecie:\t\t\t\t %d\n", client_socket);
+        buf[strcspn(buf, "\n")] = 0; //<---- USUWA ENTER ZE STRINGA!
+        if (read_message == -1) {
+            printf("Błąd przy próbie odczytu z gniazda %d\n", client_socket);
+            exit(-1);
+        }
+        char *arguments[100] = {};
+        //memset(*arguments, 0, strlen(*arguments));
+        choose_command = readCommand(tokens, buf, arguments);
+        printBreak();
+
+        //char* temp;
+        char* temp = malloc(strlen(path)+1);
+        strcpy(temp, path);
+
+        //strUser.user_socket = connection_socket_descriptor;
+        strUser.path = path;
+
+        for (i = 0; i < 5; i++) {
+            printf("Wynik arguments[%d]: %s\n", i, arguments[i]);
+        }
+                printf("\n");
+                printBreak();
+                printf("Wynik rzutowania komendy: %d\n", choose_command);
+                memset(buf, 0, 100);
+                switch (choose_command) {
+                    case 0:
+                        printf("\t KOMENDA: TOUCH\n");
+                        printBreak();
+                        printf("\n");
+                        touchCommand(strUser, arguments);
+                        break;
+                    case 1:
+                        printf("\t KOMENDA: SHARE\n");
+                        printBreak();
+                        printf("\n");
+                        //shareCommand();
+                        break;
+                    case 2:
+                        printf("\t KOMENDA: LIST\n");
+                        printBreak();
+                        printf("\n");
+                        //listCommand(user);
+                        break;
+                    case 3:
+                        printf("KOMENDA: DELETE\n");
+                        printBreak();
+                        printf("\n");
+                        //deleteCommand(user, arguments);
+                        break;
+                    case 4:
+                        printf("KOMENDA: COPY\n");
+                        printBreak();
+                        printf("\n");
+                        //copyCommand(user);
+                        break;
+                    case 5:
+                        printf("KOMENDA: RENAME\n");
+                        printBreak();
+                        printf("\n");
+                        //renameCommand(user, arguments);
+                        break;
+                    default:
+                        printf("KOMENDA: NIEZNANA :-(\n");
+                        printBreak();
+                        printf("\n");
+                        pthread_exit(NULL);
+                        break;
+                }
+                for (i = 0; i < 40; i++) {
+                    //free(arguments[i]);
+                    arguments[i] = NULL;
+                }
+                //free(arguments);
+                //printf("Zamykam watek\n");
+            }
+}
+
+
 
 // funkcja opisująca zachowanie wątku - musi przyjmować argument typu (void *) i zwracać (void *)
 void *ThreadBehavior(void *t_data){
@@ -37,33 +135,29 @@ void *ThreadBehavior(void *t_data){
 
     //PODLACZENI UZYTKOWNICY
     printf("Cos sie dzieje!!!!! \n");
-    char want[10];
-    read(client_socket, want, sizeof(user_buffer));
-    char answer[6] = "answer";
-    send(client_socket, answer, sizeof(answer), MSG_NOSIGNAL);
+    //char want[10];
+    //read(client_socket, want, sizeof(user_buffer));
+    //char answer[6] = "answer";
+    //send(client_socket, answer, sizeof(answer), MSG_NOSIGNAL);
     //memset(client_socket, 0, 100);
     int read_user = read(client_socket, user_buffer, sizeof(user_buffer));
-    connectUser_user_data(user_buffer, *user);
+    //connectUser_user_data(user_buffer, );
 
     //ODCZYTAJ WIADOMOSC OD KLIENTA OBSUGIWANEGO PRZEZ TEN WATKEK
 
     while (choose_command != "q") {
         if (user->epoll_events[1].data.fd == 0) {
-            printf("Cos sie dzieje \n");
 
-            read(client_socket, want, sizeof(user_buffer));
-            printf("%s\n", want);
+            //read(client_socket, want, sizeof(user_buffer));
+            //printf("%s\n", want);
 
-            send(client_socket, answer, sizeof(answer), MSG_NOSIGNAL);
+            //send(client_socket, answer, sizeof(answer), MSG_NOSIGNAL);
             char buf[100];
 
             int read_message;
-            //while (buf == NULL || buf == "want"){
-            //    printf("ODCZYTANE\n");
-            //    printf("%s\n", buf);
-            read_message = read(client_socket, buf, sizeof(user_buffer));
-            //    printf("%s\n", buf);
-            //}
+
+            read_message = read(client_socket, buf, sizeof(user));
+
 
             if (read_message > 0) {
                 printBreak();
@@ -144,44 +238,6 @@ void *ThreadBehavior(void *t_data){
         }
     }
     printf("Zamykam watek\n");
-
-    /*
-            // obsłuż utratę połączenia z klientem
-        else if ( read_result == 0)
-        {
-            //pthread_mutex_lock(&t_data_ptr->client_socketfd_lock);
-            clear_array_cell(t_data_ptr->client_socketfd, t_data_ptr->max_number_of_clients, client_socket);
-            //pthread_mutex_unlock(&t_data_ptr->client_socketfd_lock);
-
-            //pthread_mutex_lock(&t_data_ptr->number_of_clients_lock);
-            t_data_ptr->number_of_clients--;
-            //pthread_mutex_unlock(&t_data_ptr->number_of_clients_lock);
-
-            printf("Połączenie z gniazdem %d zostało zakończone\nObecne połączone gniazda:\n", client_socket);
-            print_array_content(t_data_ptr->client_socketfd, t_data_ptr->max_number_of_clients);
-        }
-
-        // wyślij odczytaną wiadomość do wszystkich podłączonych klientów
-        // (poza klientem obsługiwanym przez ten wątek)
-
-        //pthread_mutex_lock(&t_data_ptr->client_socketfd_lock);
-        for (int i = 0; i < t_data_ptr->max_number_of_clients; i++)
-        {
-            if(t_data_ptr->client_socketfd[i] != 0 && t_data_ptr->client_socketfd[i] != client_socket)
-            {
-                write_result = write(t_data_ptr->client_socketfd[i], buf, strlen(buf));
-                if (write_result == -1)
-                {
-                    printf("Błąd przy próbie wysłania wiadomości do klienta\n");
-                    exit(-1);
-                }
-            }
-        }
-        //pthread_mutex_unlock(&t_data_ptr->client_socketfd_lock);
-
-        // wyczyść bufer
-        memset(buf, 0, 100);
-    */
 
 }
 

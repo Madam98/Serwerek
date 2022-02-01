@@ -143,7 +143,9 @@
 				17,
 				18,
 				19,
-				20
+				20,
+				21,
+				22
 			]
 		}
 	],
@@ -253,6 +255,16 @@
 		{
 			"backtrace" : 1,
 			"path" : "Headers/commands/rename.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Headers/executecommand.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Headers/commands/add.h",
 			"sourceGroupIndex" : 2
 		}
 	],

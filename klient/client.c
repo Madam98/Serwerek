@@ -181,6 +181,7 @@ void handleRequest(int connection_socket_descriptor){
     }
 }
 
+
 int main (int argc, char *argv[])
 {
     int connection_socket_descriptor;
@@ -193,10 +194,6 @@ int main (int argc, char *argv[])
     argv[2] = "1235";
     argv[3] = "Adam_Example"; //<----user
 
-    // if (argc != 3){
-    //     fprintf(stderr, "Zly sposob uzycia: %s server_name port_number\n", argv[0]);
-    //     exit(1);
-    // }
 
     server_host_entity = gethostbyname(argv[1]);
     if (! server_host_entity){
@@ -210,11 +207,6 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
-    //int epfd = epoll_create(1);
-    //struct epoll_event event;
-    //event.events = EPOLLIN; // Cann append "|EPOLLOUT" for write events as well
-    //event.data.fd = connection_socket_descriptor;
-    //epoll_ctl(epfd, EPOLL_CTL_ADD, connection_socket_descriptor, &event);
 
     memset(&server_address, 0, sizeof(struct sockaddr));
     server_address.sin_family = AF_INET;
@@ -224,50 +216,48 @@ int main (int argc, char *argv[])
     connect_result = connect(connection_socket_descriptor, (struct sockaddr*)&server_address, sizeof(struct sockaddr));
     while (connect_result < 0)
     {
-        fprintf(stderr, "%s: Blad przy probie podlczenia z serwerem (%s:%i).\n", argv[0], argv[1], atoi(argv[2]));
+        fprintf(stderr, "%s: Blad przy probie podlaczenia z serwerem (%s:%i).\n", argv[0], argv[1], atoi(argv[2]));
         sleep(5);
         connect_result = connect(connection_socket_descriptor, (struct sockaddr*)&server_address, sizeof(struct sockaddr));
-        //exit(1);
+
     }
 
     char* buf;
-    //printf("Chce odebrac wiadomosc zwrotna\n");
-    //recv(connection_socket_descriptor, buf, sizeof(buf), MSG_WAITALL);
-    //printf("Odebralem\n");
-    //sleep(4);
 
-    //printf("Halo\n");
-    char* znaki[40];
+    char znaki[50];
     char want[4] = "want";
     char answer[20] = "";
-    handleConnection(connection_socket_descriptor);
+
     while(1){
-        printf("Wpisz cos\n");
+        printf("\nWpisz cos\n");
+        //scanf("%s",&znaki);
 
-        scanf("%40s",&znaki);
+        fgets(znaki, 50, stdin);
+        //scanf("%[^\n]%*c", znaki);
 
-        while (strlen(answer) == 0) {
-            printf("WCHODZE \n");
-            send(connection_socket_descriptor, want, sizeof(want), MSG_CONFIRM);
-            sleep(2);
-            recv(connection_socket_descriptor, answer, sizeof(answer), MSG_DONTWAIT);
-            printf("%s\n", answer);
-            sleep(2);
+        //printf("Dlugosc wprowadzonego stringa: %c\n", sizeof(znaki));
+
+
+        if(strcmp(znaki, "q\n") == 0){
+            close(connect_result);
+            return(0);
         }
-        memset(answer, 0, 6);
 
-        printf("Wysylam komende uzytkownika: %s\n", znaki);
+
+        printf("Wysylam komende uzytkownika:\t %s\n", znaki);
         //send(connection_socket_descriptor, znaki, sizeof(znaki), MSG_CONFIRM);
+        int rozmiar = strlen(znaki);
 
+        //printf("Dlugosc wprowadzonego stringa: %d\n", strlen(znaki));
+        //printf("Dlugosc wprowadzonego stringa: %d\n", sizeof(znaki));
+        //printf("Dlugosc wprowadzonego stringa: %d\n", rozmiar);
+
+        send(connection_socket_descriptor, znaki, rozmiar, MSG_CONFIRM);
     }
 
     //handleConnection(connection_socket_descriptor);
 
 
-    /*while(1) {
-        recv(connection_socket_descriptor, buf, 12, 0);
-        printf("Odebralem wiadomosc\n");
-    }*/
     sleep(10000);
     close(connect_result);
     return 0;

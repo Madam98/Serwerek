@@ -86,13 +86,24 @@ void enterArray(char** tokens, char*** result){
 
 
 //ODCZYT PIERWSZEJ WCZYTANEJ WARTOSCI DO SPACJI I ZRZUTOWANIE JEJ NA WARTOSC NUMERYCZNA
-int readCommand(char** tokens, char* buf[], char* result[]){
+int readCommand(char** tokens, char* buf, char* result[]){
     int i;
     int j;
-    char* first = " ";
+    char* rest = "";
     int counter = 0;
 
-    tokens = buf_split(buf, ' '); //<-- wynik tablica wskaznikow char
+    rest = strchr(buf, ':');
+    int length_first = strlen(buf) - strlen(rest);
+    char* first = (char*)malloc((length_first + 1) * sizeof(char));
+
+    strncpy(first, buf, length_first);
+    char* second_rest = rest + 1;
+    second_rest[strlen(second_rest)] = '\0';
+
+    //printf("Second_rest: %s\n", second_rest);
+    //printf("Rozmiar second_rest: %d\n", strlen(second_rest));
+
+    tokens = buf_split(second_rest, ' '); //<-- wynik tablica wskaznikow char
 
     if(tokens){
         for (i = 0; *(tokens + i); i++){
@@ -102,41 +113,26 @@ int readCommand(char** tokens, char* buf[], char* result[]){
         printf("\n");
         //free(tokens);
     }
+    char** tmp = calloc(100, sizeof(char*));
+    if (tokens) {
+        for (j = 0; *(tokens + j); j++) {
+            char* tmp;
+            strcpy(tmp, *(tokens + j));
+            result[j] = tmp;
+            //*(tmp) = *(tokens + j);
+            //result[j] = *(tmp);
+            free(*tokens + j);
+        }
+    }
 
-    first = *(tokens + 0);
     for (i = 0; i < COMMAND_SIZE; i++){
-        //fwrite(commands[i], 1, strlen(commands[i]), stdout);
-        if(strcmp(first, commands[i]) == 0){
-            free(*tokens + 0);
-
-            for (j = 0; *(tokens + j); j++) {
-                counter++;
-            }
-            char** tmp = calloc(40, sizeof(char*));
-            //char** result = malloc(40 * sizeof(char*));
-            counter--;
-            //char* array_arguments[counter - 1];
-
-            if (tokens) {
-                for (j = 1; *(tokens + j); j++) {
-                    //(*result)[j - 1] = *(tokens + j + 1);
-                    *(tmp + j - 1) = *(tokens + j);
-                    //strcpy((*result)[j - 1], *(tokens + j));
-                    //strcpy(tmp[j], *(tokens + j + 1));
-                    //*(tmp + j) = "5";
-                    //printf("Buffor: %s\n", (tmp + j - 1));
-                    //free(*(tokens + i));
-                    result[j - 1] = *(tmp + j - 1);
-                }
-                //*result = tmp;
-            }
-
-            //enterArray(tokens, &result);
+        if(strcmp(first, PKW_converter[i].key) == 0){
             return i;
         }
-        else
-            printf("Lancuchy nie sa rowne\n");
+        //else
+            //printf("Lancuchy nie sa rowne\n");
     }
+    return -1;
 }
 //***********************
 
