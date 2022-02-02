@@ -15,7 +15,7 @@
 #ifndef SERWER_EXECUTECOMMAND_H
 #define SERWER_EXECUTECOMMAND_H
 
-void Example(char* user_message, int client_socket, struct clients_struct* client_data){
+void ExecuteCommand(char* user_message, int client_socket, struct clients_struct* client_data){
     int choose_command;
     int i;
     char* name = client_data->name;
@@ -28,7 +28,7 @@ void Example(char* user_message, int client_socket, struct clients_struct* clien
         printf("Jestem na kliencie:\t\t\t %d\n", client_socket);
         printf("Odczytane:\t\t\t\t\t %s\n", user_message);
         printf("\nPARAMETRY CLIENT\n");
-        printf("client_data->client_socket: %d\n", client_data->client_socket);
+        printf("client_data->client_socket:  %d\n", client_data->client_socket);
         printf("client_data->path:\t\t\t %s\n", client_data->path);
         printf("client_data->name:\t\t\t %s\n\n", client_data->name);
         //********************************************************************
@@ -69,33 +69,32 @@ void Example(char* user_message, int client_socket, struct clients_struct* clien
                 break;
             case 3:
                 printf("\t KOMENDA: LIST\n");
+                //listCommand(user);
                 printBreak();
                 printf("\n");
-                //listCommand(user);
                 break;
             case 4:
-                printf("KOMENDA: DELETE\n");
+                printf("\t KOMENDA: DELETE\n");
+                deleteCommand(client_data, arguments, size_of_array);
                 printBreak();
                 printf("\n");
-                //deleteCommand(user, arguments);
                 break;
             case 5:
-                printf("KOMENDA: COPY\n");
+                printf("\t KOMENDA: COPY\n");
+                //copyCommand(user);
                 printBreak();
                 printf("\n");
-                //copyCommand(user);
                 break;
             case 6:
-                printf("KOMENDA: RENAME\n");
+                printf("\t KOMENDA: NEWNAME\n");
+                renameCommand(client_data, arguments, size_of_array);
                 printBreak();
                 printf("\n");
-                //renameCommand(user, arguments);
                 break;
             default:
-                printf("KOMENDA: NIEZNANA :-(\n");
+                printf("\t KOMENDA: NIEZNANA :-(\n");
                 printBreak();
                 printf("\n");
-                //pthread_exit(NULL);
                 break;
         }
         for (i = 0; i < 40; i++) {
@@ -105,7 +104,7 @@ void Example(char* user_message, int client_socket, struct clients_struct* clien
     }
 }
 
-void ExecuteCommand(char* user_message, int client_socket, struct clients_struct* client_data){
+void Example(char* user_message, int client_socket, struct clients_struct* client_data){
 
     char** tokens;
     int choose_command;

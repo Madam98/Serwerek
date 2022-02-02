@@ -33,7 +33,7 @@ const static struct{
         {"list",    list},
         {"delete",  delete},
         {"copy",    copy},
-        {"rename",  newname}
+        {"newname",  newname}
 };
 int server_socket_descriptor;
 int client_socket_descriptor;

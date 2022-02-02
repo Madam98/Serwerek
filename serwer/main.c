@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
 
 
     //STWORZENIE FOLDERU Z POTENCJLANYMI DOKUMENTAMI(jesli nie istnieja)
-    char *path = getenv("PWD");
+    char* path = getenv("PWD");
     char* info = "W folderu z wykonywanym plikiem musi znajdowac sie folder DOCUMENTS\n";
     folderInfo(path, info);
 
@@ -181,7 +181,10 @@ int main(int argc, char* argv[])
                 //connectUser(example, example_2);
                 //----------------------------------------------------
 
-                our_clients_data[counter].path            = path;
+                //our_clients_data[counter].path            = path;
+
+                our_clients_data[counter].path = (char*)malloc(100);
+                strcpy(our_clients_data[counter].path, path);
                 our_clients_data[counter].name            = "";
                 our_clients_data[counter].client_socket   = client_socket_descriptor;
                 our_clients_data[counter].counter         = counter;
@@ -258,8 +261,8 @@ int main(int argc, char* argv[])
 
                     //Example();
                     struct clients_struct* temp_struct = &our_clients_data[found];
-                    Example(wsk_temp, socket_fd, temp_struct);
-                    //ExecuteCommand(wsk_temp, socket_fd, temp_struct);
+                    //Example(wsk_temp, socket_fd, temp_struct);
+                    ExecuteCommand(wsk_temp, socket_fd, temp_struct);
 
                     //event.data.fd = socket_fd;
                     //Set Write Action Events for Annotation
@@ -272,7 +275,7 @@ int main(int argc, char* argv[])
                     printf("KONIEC EPOLLIN\n");
                     printf("Socket_fd: %d\n", socket_fd);
 
-                    //sleep(5);
+
                 }
 
 

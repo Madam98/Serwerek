@@ -7,16 +7,14 @@
 #ifndef SERWER_RENAME_H
 #define SERWER_RENAME_H
 
-void renameCommand(void *t_data_ptr, char* arguments[]){
+void renameCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
     char buf[100];
-    struct user_data *user = (struct user_data *)t_data_ptr;
 
-    int client_socket = user->user_socket;
-    char* result = user->path;
+    int client_socket   = client_data->client_socket;
+    char* result        = client_data->client_socket;
+    char* path          = (char*)malloc(strlen(result)+1);
 
-    char* path = (char*)malloc(strlen(result)+1);
     strcpy(path, result);
-
     printBreak();
     printf("%s\n", path);
     //sprawdz czy istnieje glowny folder uzytkownika
@@ -32,7 +30,6 @@ void renameCommand(void *t_data_ptr, char* arguments[]){
 
     char* new_path = (char*)malloc(strlen(result)+1);
     strcpy(new_path, result);
-
 
     printBreak();
     strcat(path, "/");

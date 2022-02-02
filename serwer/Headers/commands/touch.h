@@ -17,11 +17,12 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
 
     //char* buf = (char*)malloc(strlen(path)+1);
 
-    char* path;
+    char* path = client_data->path;
 
-    strcpy(path, client_data->path);
-    strcat(path, "/");
-    strcat(path, client_data->name);
+
+    //strcpy(path, client_data->path);
+    //strcat(path, "/");
+    //strcat(path, client_data->name);
 
     char* buf = NULL;
     buf = (char *)malloc(strlen(client_data->path) + 1);
@@ -52,7 +53,7 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
     while(arguments[i] != NULL) {
         strcat(buf, arguments[i]);
         if(arguments[i + 1] != NULL)
-            strcat(path, " ");
+            strcat(buf, " ");
         i++;
     }
     strcat(buf, ".txt");

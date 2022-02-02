@@ -27,6 +27,13 @@ void addCommand(struct clients_struct *client_data, char *arguments[], int size_
     client_data->name = name;
     connectUser(client_data->name, client_data->path);
 
+    char* path;
+
+    strcpy(path, client_data->path);
+    strcat(path, "/");
+    strcat(path, client_data->name);
+
+    strcpy(client_data->path, path);
 };
 
 
