@@ -42,7 +42,7 @@ void *KeyFunction(char* user_buffer, int client_socket, char* path){
         }
         char *arguments[100] = {};
         //memset(*arguments, 0, strlen(*arguments));
-        choose_command = readCommand(tokens, buf, arguments);
+        //choose_command = readCommand(tokens, buf, arguments);
         printBreak();
 
         //char* temp;
@@ -172,7 +172,7 @@ void *ThreadBehavior(void *t_data){
                 int i;
 
                 char *arguments[40];
-                choose_command = readCommand(tokens, buf, arguments);
+                //choose_command = readCommand(tokens, buf, arguments);
                 printBreak();
 
                 for (i = 0; i < 5; i++) {

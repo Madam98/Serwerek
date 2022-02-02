@@ -6,7 +6,7 @@
 #ifndef SERWER_TOUCH_H
 #define SERWER_TOUCH_H
 
-void touchCommand(char* path, char *arguments[]){
+void touchCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
     //readlink("/proc/self/exe", path, sizeof(path)); //<--- w systemach uniksowych do znalezienia sciezki musimy odwolac sie do /usr/bin/perl
     //komenda na gorze powinna dzialac ale no wlasnie cos jest nie tak. Przejdziemy do podstepu i wykonamy komende linuksowa z przekierowaniem do /dev/null
     //system("pwd >/dev/null 2>&1");
@@ -16,9 +16,15 @@ void touchCommand(char* path, char *arguments[]){
     //char* result = user->path;
 
     //char* buf = (char*)malloc(strlen(path)+1);
-    //char* path;
+
+    char* path;
+
+    strcpy(path, client_data->path);
+    strcat(path, "/");
+    strcat(path, client_data->name);
+
     char* buf = NULL;
-    buf = (char *)malloc(strlen(path) + 1);
+    buf = (char *)malloc(strlen(client_data->path) + 1);
     strcpy(buf, path);
 
     //t_data_ptr->path;

@@ -128,12 +128,14 @@ int main(int argc, char* argv[])
     ssize_t n;
     int m;
     char line[MAXLINE];
-    socklen_t clilen;
+
 
     while(1){
-        if((nfds = epoll_wait(epoll_fd, events,MAX_EVENTS, -1)) == -1) {
-            printf("epoll wait failure\n");
-        }
+
+        nfds = epoll_wait(epoll_fd, events,MAX_EVENTS, -1);
+        //if((nfds = epoll_wait(epoll_fd, events,MAX_EVENTS, -1)) == -1) {
+        //    printf("epoll wait failure\n");
+        //}
         printBreak();
         printf("Wskaznik NFDS:\t\t\t\t %d\n", nfds);
         for (i = 0; i < nfds; ++i) {
@@ -141,8 +143,9 @@ int main(int argc, char* argv[])
 
                 //---------------------------------
                 struct sockaddr_in clientaddr;
+                socklen_t clilen = sizeof(clientaddr);
                 client_socket_descriptor = accept(server_socket_descriptor, (struct sockaddr *) &clientaddr, &clilen);
-                //fcntl(client_socket_descriptor, F_SETFL, O_NONBLOCK, 1); <--- ta komenda sprawia ze nie czeka na read
+                //fcntl(client_socket_descriptor, F_SETFL, O_NONBLOCK, 1); //<--- ta komenda sprawia ze nie czeka na read
                 if (client_socket_descriptor < 0) {
                     fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
                     exit(1);
@@ -156,7 +159,7 @@ int main(int argc, char* argv[])
 
                 //---------------------------------
 
-                event.events = EPOLLIN | EPOLLET;
+                event.events = EPOLLIN;
                 //event.events = EPOLLIN | EPOLLRDHUP;
                 event.data.fd = client_socket_descriptor;
 
@@ -207,57 +210,71 @@ int main(int argc, char* argv[])
                 //handleConnection(client_socket_descriptor, t_data_ptr, array, path, epoll_fd, &event, events);
             }
 
-            else if (events[i].events&EPOLLIN){ //If the user is already connected and receives data, read in.
-                printf("Event:\t\t\t\t\t\t EPOLLIN\n");
+            else if (events[i].events&EPOLLIN) { //If the user is already connected and receives data, read in.
+                    printf("Event:\t\t\t\t\t\t EPOLLIN\n");
 
-                memset(line, 0, MAXLINE);
-                memset(temp, 0, MAXLINE);
+                    memset(line, 0, MAXLINE);
+                    memset(temp, 0, MAXLINE);
 
-                if ( (socket_fd = events[i].data.fd) < 0)
-                    continue;
-                printf("Moj socket_fd:\t\t\t\t %d\n", socket_fd);
+                    if ((socket_fd = events[i].data.fd) < 0)
+                        continue;
+                    printf("Moj socket_fd:\t\t\t\t %d\n", socket_fd);
 
-                if ( (n = read(socket_fd, line, MAXLINE)) < 0) {
-                    if (errno == ECONNRESET) {
+                    if ((n = read(socket_fd, line, MAXLINE)) < 0) {
+                        if (errno == ECONNRESET) {
+                            close(socket_fd);
+                            events[i].data.fd = -1; //<-- ustawiamy -1 aby inne ify nie obslugiwaly juz zdarzenia
+                        } else //<-- Jesli blad odczytu koncowego deskryptora
+                            printf("readline error\n");
+                    } else if (n == 0) {
                         close(socket_fd);
-                        events[i].data.fd = -1; //<-- ustawiamy -1 aby inne ify nie obslugiwaly juz zdarzenia
-                    } else //<-- Jesli blad odczytu koncowego deskryptora
-                        printf("readline error\n");
-                } else if (n == 0) {
-                    close(socket_fd);
-                    events[i].data.fd = -1;
-                }
-
-
-                if(n<MAXLINE-2)
-                    line[n] = '\0';
-
-                //*temp = malloc(strlen(line[n])+1);
-                strncpy(temp, line, n);
-                temp[strcspn(line, "\n")] = 0; //<---- USUWA ENTER ZE STRINGA!
-
-                //memcpy(temp, line, n);
-                int j;
-                int found;
-                for (j = 0; j < 100; j++){
-                    if (events[i].data.fd == our_clients_data[j].client_socket){
-                        found = j;
+                        events[i].data.fd = -1;
                     }
+
+
+                    if (n < MAXLINE - 2)
+                        line[n] = '\0';
+
+                    //*temp = malloc(strlen(line[n])+1);
+                    strncpy(temp, line, n);
+                    temp[strcspn(line, "\n")] = 0; //<---- USUWA ENTER ZE STRINGA!
+
+                    //memcpy(temp, line, n);
+
+
+                    //-------------------------------------------------------------------------------
+                    int j;
+                    int found;
+                    for (j = 0; j < 100; j++) {
+                        if (events[i].data.fd == our_clients_data[j].client_socket) {
+                            found = j;
+                            break;
+                        }
+                    }
+                    printf("ExecuteCommand:\t\t\t\t %d\n", j);
+                    printf("Socket_fd: %d\n", socket_fd);
+
+                    //-------------------------------------------------------------------------------
+
+                    //Example();
+                    struct clients_struct* temp_struct = &our_clients_data[found];
+                    Example(wsk_temp, socket_fd, temp_struct);
+                    //ExecuteCommand(wsk_temp, socket_fd, temp_struct);
+
+                    //event.data.fd = socket_fd;
+                    //Set Write Action Events for Annotation
+                    //event.events = EPOLLOUT|EPOLLET;
+                    //Modify the event to be handled on sockfd to EPOLLOUT
+                    //epoll_ctl(epoll_fd, EPOLL_CTL_MOD, socket_fd, &event);
+
+                    //Setting file descriptors for write operations
+
+                    printf("KONIEC EPOLLIN\n");
+                    printf("Socket_fd: %d\n", socket_fd);
+
+                    //sleep(5);
                 }
 
-
-
-                ExecuteCommand(wsk_temp, socket_fd, &our_clients_data[found]);
-
-                //Setting file descriptors for write operations
-                event.data.fd = socket_fd;
-
-                //Set Write Action Events for Annotation
-                event.events = EPOLLOUT|EPOLLET;
-
-                //Modify the event to be handled on sockfd to EPOLLOUT
-                epoll_ctl(epoll_fd,EPOLL_CTL_MOD,socket_fd,&event);
-            }
 
             else if (events[i].events&EPOLLOUT){ //If there is data to send
                 printf("Event:\t\t\t\t\t\t EPOLLOUT\n");
@@ -275,9 +292,9 @@ int main(int argc, char* argv[])
             }
         }
     }
-
-    // zamknięcie gniazda
-    close(server_socket_descriptor);
-
     return(0);
+    // zamknięcie gniazda
+    //close(server_socket_descriptor);
+
+
 }

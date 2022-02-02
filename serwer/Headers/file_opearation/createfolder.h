@@ -46,7 +46,9 @@ void connectUser(char* buf, char* user_path){
     printBreak();
     printf("Nazwa uzytkownika: %s\n", buf);
 
-    char* path = user_path;
+    char* path = strdup(user_path);
+    strcpy(path, user_path);
+
     //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
     //strcpy(path, t_data_ptr.path);
 

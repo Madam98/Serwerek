@@ -6,7 +6,7 @@
 #ifndef SERWER_SHARE_H
 #define SERWER_SHARE_H
 
-void shareCommand(void *t_data){
+void shareCommand(){
 
     printf("KOMENDA W PRZYGOTOWANIU!!\n");
     //POMYSLEC NAD ROZWIAZANIEM
