@@ -38,6 +38,7 @@ void createFolder(char* path, char* dirname) {
         mkdir(path, 0777);
     }
 
+    free(folder_sciezka);
     //pod koniec wywolania funkcji znajdujemy sie w folderze DOCUMENTS
 }
 
@@ -58,6 +59,8 @@ void connectUser(char* buf, char* user_path){
     printf("Sciezka utworzonego folderu: \n\t%s\n", path);
     printBreak();
     printf("\n");
+
+    free(path);
 }
 
 

@@ -27,6 +27,7 @@
 #include <Headers/commands/delete.h>
 #include <Headers/commands/copy.h>
 #include <Headers/commands/rename.h>
+#include <Headers/commands/enter_file.h>
 
 //-----------------------------------------------------------------------------
 /*
@@ -42,17 +43,16 @@ TO DO user commands
 
 int main(int argc, char* argv[])
 {
-    struct thread_data_t *t_data_ptr = malloc(sizeof(struct thread_data_t));
-    struct array_data_clients *array = malloc(sizeof(struct array_data_clients));
+    //struct thread_data_t *t_data_ptr = malloc(sizeof(struct thread_data_t));
     struct epoll_event event, events[MAX_EVENTS];
     struct clients_struct our_clients_data[100];
     struct number_map numbers_map[100];
 
     //PRZYGOTOWYWANIE STRUKTUR
-    createThreadClient(max_num_of_clients, t_data_ptr);
-    createArrayClient(array);
+    //createThreadClient(max_num_of_clients, t_data_ptr);
+    //createArrayClient(array);
 
-    initMutex(t_data_ptr);
+    //initMutex(t_data_ptr);
     initAdreessServer(&server_address);
 
 
@@ -121,7 +121,6 @@ int main(int argc, char* argv[])
     int nfds;
     int i;
     int counter = 0;
-    struct user_data strUser;
     char temp[MAXLINE];
     char *wsk_temp = temp;
     int socket_fd;
@@ -188,6 +187,7 @@ int main(int argc, char* argv[])
                 our_clients_data[counter].name            = "";
                 our_clients_data[counter].client_socket   = client_socket_descriptor;
                 our_clients_data[counter].counter         = counter;
+                our_clients_data[counter].file_descriptor = 0;
                 counter++;
 
                 printBreak();
@@ -263,6 +263,14 @@ int main(int argc, char* argv[])
                     struct clients_struct* temp_struct = &our_clients_data[found];
                     //Example(wsk_temp, socket_fd, temp_struct);
                     ExecuteCommand(wsk_temp, socket_fd, temp_struct);
+                    ShowListFile(temp_struct);
+                    ShowClients(our_clients_data);
+
+
+                    printf("WPISANY FILE DESCRIPTOR: %d\n", temp_struct->file_descriptor);
+
+                    //ShowClients(our_clients_data);
+
 
                     //event.data.fd = socket_fd;
                     //Set Write Action Events for Annotation
@@ -274,11 +282,8 @@ int main(int argc, char* argv[])
 
                     printf("KONIEC EPOLLIN\n");
                     printf("Socket_fd: %d\n", socket_fd);
-
-
                 }
-
-
+            
             else if (events[i].events&EPOLLOUT){ //If there is data to send
                 printf("Event:\t\t\t\t\t\t EPOLLOUT\n");
                 socket_fd = events[i].data.fd;

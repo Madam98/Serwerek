@@ -151,4 +151,6 @@ CMakeFiles/serwer.dir/main.c.o: /home/oem/Desktop/Serwerek/serwer/main.c \
  /home/oem/Desktop/Serwerek/serwer/./Headers/commands/list.h \
  /home/oem/Desktop/Serwerek/serwer/./Headers/commands/delete.h \
  /home/oem/Desktop/Serwerek/serwer/./Headers/commands/copy.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/rename.h
+ /home/oem/Desktop/Serwerek/serwer/./Headers/commands/rename.h \
+ /home/oem/Desktop/Serwerek/serwer/./Headers/commands/enter_file.h \
+ /home/oem/Desktop/Serwerek/serwer/./Headers/commands/message.h

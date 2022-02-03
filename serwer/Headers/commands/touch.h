@@ -24,8 +24,8 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
     //strcat(path, "/");
     //strcat(path, client_data->name);
 
-    char* buf = NULL;
-    buf = (char *)malloc(strlen(client_data->path) + 1);
+    char* buf = strdup(client_data->path);
+    //buf = (char *)malloc(strlen(client_data->path) + 1);
     strcpy(buf, path);
 
     //t_data_ptr->path;
@@ -57,9 +57,10 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
         i++;
     }
     strcat(buf, ".txt");
-    printf("Sciezka tworzonego pliku: \n\t%s\n", path);
+    printf("Sciezka tworzonego pliku: \n\t%s\n", buf);
 
-    FILE* file_descriptor = fopen(buf, "r");
+    FILE* file_descriptor ;
+    file_descriptor = fopen(buf, "r");
 
     //printf("%d\n", file_descriptor);
     if (file_descriptor > 0) {
@@ -73,6 +74,7 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
     }
     printBreak();
     fclose(file_descriptor);
+    free(buf);
 };
 
 #endif /* !SERWER_TOUCH_H */

@@ -5,7 +5,7 @@
 
 #define SERVER_PORT 1235
 #define QUEUE_SIZE 10
-#define COMMAND_SIZE 6
+#define COMMAND_SIZE 10
 
 #define MAX_EVENTS 20
 #define MAXLINE 100
@@ -20,7 +20,10 @@ enum commands{
     list,
     delete,
     copy,
-    newname
+    newname,
+    enter,
+    modifiy,
+    clof
 };
 
 const static struct{
@@ -33,7 +36,10 @@ const static struct{
         {"list",    list},
         {"delete",  delete},
         {"copy",    copy},
-        {"newname",  newname}
+        {"newname", newname},
+        {"enter",   enter},
+        {"modifiy", modifiy},
+        {"close",   clof}
 };
 int server_socket_descriptor;
 int client_socket_descriptor;

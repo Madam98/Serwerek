@@ -179,8 +179,12 @@ CMakeFiles/serwer.dir/main.c.o: ../main.c \
   ../Headers/commands/list.h \
   ../Headers/commands/delete.h \
   ../Headers/commands/copy.h \
-  ../Headers/commands/rename.h
+  ../Headers/commands/rename.h \
+  ../Headers/commands/enter_file.h \
+  ../Headers/commands/message.h
 
+
+../Headers/commands/enter_file.h:
 
 ../Headers/commands/rename.h:
 
@@ -271,6 +275,8 @@ CMakeFiles/serwer.dir/main.c.o: ../main.c \
 /usr/include/x86_64-linux-gnu/bits/environments.h:
 
 /usr/include/unistd.h:
+
+../Headers/commands/message.h:
 
 /usr/include/arpa/inet.h:
 

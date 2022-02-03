@@ -44,10 +44,17 @@ struct user_data
 struct clients_struct
 {
     int     client_socket;
-    int     counter;
-    char*   var;
     char*   name;
     char*   path;
+    int     file_descriptor;
+
+    char*   share_user;
+    int     share_file_descriptor;
+
+    int     shared_with_me_descriptors;
+
+    int     counter;
+    char*   var;
 };
 
 struct number_map

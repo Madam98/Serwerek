@@ -35,6 +35,8 @@ char** buf_split(char* a_str, const char a_delim){
        knows where the list of returned strings ends. */
     count++;
     result = malloc(sizeof(char*) * count);
+
+
     if (result){
         size_t idx  = 0;
         char* token = strtok(a_str, delim);
@@ -48,6 +50,7 @@ char** buf_split(char* a_str, const char a_delim){
         assert(idx == count - 1);
         *(result + idx) = 0;
     }
+    free(*tmp);
     return result;
 }
 
@@ -63,11 +66,17 @@ int readCommand(char* buf, char* result[]){
 
     rest = strchr(buf, ':');
     int length_first = strlen(buf) - strlen(rest);
-    char* first = (char*)malloc((length_first + 1) * sizeof(char));
+
+    //char* first = (char*)malloc(strlen((length_first) + 1) * sizeof(char));
+    //char* first = strdup();
+    //char* first = (char*)malloc((length_first) * sizeof(char));
+    //first = ;
+    char first[length_first + 1];
 
     strncpy(first, buf, length_first);
-    char* second_rest = rest + 1;
+    first[length_first] = '\0';
 
+    char* second_rest = rest + 1;
     second_rest[strlen(second_rest)] = '\0';
 
     //printf("Second_rest: %s\n", second_rest);

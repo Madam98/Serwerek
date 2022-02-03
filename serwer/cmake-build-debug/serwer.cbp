@@ -93,7 +93,13 @@
 		<Unit filename="/home/oem/Desktop/Serwerek/serwer/Headers/commands/delete.h">
 			<Option target="serwer"/>
 		</Unit>
+		<Unit filename="/home/oem/Desktop/Serwerek/serwer/Headers/commands/enter_file.h">
+			<Option target="serwer"/>
+		</Unit>
 		<Unit filename="/home/oem/Desktop/Serwerek/serwer/Headers/commands/list.h">
+			<Option target="serwer"/>
+		</Unit>
+		<Unit filename="/home/oem/Desktop/Serwerek/serwer/Headers/commands/message.h">
 			<Option target="serwer"/>
 		</Unit>
 		<Unit filename="/home/oem/Desktop/Serwerek/serwer/Headers/commands/rename.h">

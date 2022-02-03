@@ -53,7 +53,7 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
         remove(path);
         printf("USUNIETO PODANY PLIK!\n");
     }
-
-
+    fclose(file_descriptor);
+    free(path);
 }
 #endif //SERWER_DELETE_H
