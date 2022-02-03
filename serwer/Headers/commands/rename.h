@@ -7,15 +7,18 @@
 #ifndef SERWER_RENAME_H
 #define SERWER_RENAME_H
 
-void renameCommand(void *t_data_ptr, char* arguments[]){
+void renameCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
     char buf[100];
-    struct user_data *user = (struct user_data *)t_data_ptr;
 
-    int client_socket = user->user_socket;
-    char* result = user->path;
+    int client_socket   = client_data->client_socket;
+    //char* result        = client_data->client_socket;
+    //char* path          = (char*)malloc(strlen(result)+1);
 
-    char* path = (char*)malloc(strlen(result)+1);
-    strcpy(path, result);
+    char* path      = strdup(client_data->path);
+    char* new_path  = strdup(client_data->path);
+
+    strcpy(path, client_data->path);
+    strcpy(new_path, client_data->path);
 
     printBreak();
     printf("%s\n", path);
@@ -30,9 +33,7 @@ void renameCommand(void *t_data_ptr, char* arguments[]){
     printBreak();
     printf("\n");
 
-    char* new_path = (char*)malloc(strlen(result)+1);
-    strcpy(new_path, result);
-
+    //char* new_path = (char*)malloc(strlen(result)+1);
 
     printBreak();
     strcat(path, "/");
@@ -45,6 +46,7 @@ void renameCommand(void *t_data_ptr, char* arguments[]){
         i++;
     }
     if(strcmp(arguments[i], ">") == 0){
+        i++;
         while(arguments[i] != NULL) {
             strcat(new_path, arguments[i]);
             if(arguments[i + 1] != NULL)
@@ -54,8 +56,11 @@ void renameCommand(void *t_data_ptr, char* arguments[]){
     }
 
     strcat(path, ".txt");
+    strcat(new_path, ".txt");
+
+
     printf("Sciezka zmienianego pliku: \n\t%s\n", path);
-    printf("Sciezka nowego pliku: \n\t%s\n", new_path);
+    //printf("Sciezka nowego pliku: \n\t%s\n", new_path);
 
     FILE* file_descriptor = fopen(path, "r");
 
@@ -65,8 +70,10 @@ void renameCommand(void *t_data_ptr, char* arguments[]){
         printf("Podany plik o danej nazwie nie istnieje!\n");
     }
     else{
-        printf("Sciezka istniejacego pliku: \n\t%s\n", path);
-        close(file_descriptor);
+        char ch;
+        FILE* new_file_descriptor = fopen(new_path, "r");
+        printf("Sciezka tworzonego pliku: \n\t%s\n", path);
+
         rename(path, new_path);
         printf("Udalo sie ZMIENIC nazwe pliku!\n");
     }

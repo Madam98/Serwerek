@@ -117,58 +117,113 @@ int main(int argc, char* argv[])
     struct user_data strUser;
     char *temp;
 
+
+    //printf("Odebralem\n");
+}
+
+void *ThreadRequest(void *t_data){
+    printf("Sprawdzam odpowiedz\n");
+
+    struct thread_data_t *th_data = (struct thread_data_t*)t_data;
+    //dostep do całej struktury: (*th_data).pole
+
+    write((*th_data).server_descriptor, "", 0);
+
+    //zamkniecie watku
+
+    pthread_exit(NULL);
+
+}
+
+void handleRequest(int connection_socket_descriptor){
+    //wynik funkcji tworzacej watek
+    int create_result = 0;
+    //uchwyt na watek
+    pthread_t thread1;
+    //dane, ktore zostana przekazane do watku
+    struct thread_data_t t_data;
+
+    create_result = pthread_create(&thread1, NULL, ThreadRequest, (void *)&t_data);
+    //printf("%d\n", create_result);
+    if (create_result){
+        printf("Blad przy probie utworzenia watku, kod bledu: %d\n", create_result);
+        exit(-1);
+    }
+}
+
+
+int main (int argc, char *argv[])
+{
+    int connection_socket_descriptor;
+    int connect_result;
+    struct sockaddr_in server_address;
+    struct hostent* server_host_entity;
+    struct epoll_event events[MAX_EPOLL_EVENTS];
+
+    argv[1] = "127.0.0.1";
+    argv[2] = "1235";
+    argv[3] = "Adam_Example"; //<----user
+
+
+    server_host_entity = gethostbyname(argv[1]);
+    if (! server_host_entity){
+        fprintf(stderr, "%s: Nie mozna uzyskac adresu IP serwera.\n", argv[0]);
+        exit(1);
+    }
+
+    connection_socket_descriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (connection_socket_descriptor < 0){
+        fprintf(stderr, "%s: Blad przy probie utworzenia gniazda.\n", argv[0]);
+        exit(1);
+    }
+
+
+    memset(&server_address, 0, sizeof(struct sockaddr));
+    server_address.sin_family = AF_INET;
+    memcpy(&server_address.sin_addr.s_addr, server_host_entity->h_addr, server_host_entity->h_length);
+    server_address.sin_port = htons(atoi(argv[2]));
+
+    connect_result = connect(connection_socket_descriptor, (struct sockaddr*)&server_address, sizeof(struct sockaddr));
+    while (connect_result < 0)
+    {
+        fprintf(stderr, "%s: Blad przy probie podlaczenia z serwerem (%s:%i).\n", argv[0], argv[1], atoi(argv[2]));
+        sleep(5);
+        connect_result = connect(connection_socket_descriptor, (struct sockaddr*)&server_address, sizeof(struct sockaddr));
+
+    }
+
+    char* buf;
+
+    char znaki[50];
+    char want[4] = "want";
+    char answer[20] = "";
+
     while(1){
-        if((epoll_des = epoll_wait(epoll_fd, events,MAX_EVENTS, -1)) == -1) {
-            printf("epoll wait\n");
+        printf("\nWpisz cos\n");
+        //scanf("%s",&znaki);
+
+        fgets(znaki, 50, stdin);
+        //scanf("%[^\n]%*c", znaki);
+
+        //printf("Dlugosc wprowadzonego stringa: %c\n", sizeof(znaki));
+
+
+        if(strcmp(znaki, "q\n") == 0){
+            close(connect_result);
+            return(0);
         }
-        printf("Wskaznik NFDS: %d\n", epoll_des);
-        for (i = 0; i < epoll_des; ++i) {
-            if (events[i].data.fd == server_socket_descriptor) {
-                struct sockaddr_in client_sock;
-                socklen_t slen = sizeof(client_sock);
-                connection_socket_descriptor = accept(server_socket_descriptor, (struct sockaddr*)&client_sock, &slen);
-                //fcntl(connection_socket_descriptor, F_SETFL, O_NONBLOCK); <--- ta komenda sprawia ze nie czeka na read
-                if (connection_socket_descriptor < 0) {
-                    fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
-                    exit(1);
-                }
 
-                event.events = EPOLLIN | EPOLLRDHUP;
-                event.data.fd = connection_socket_descriptor;
 
-                if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, connection_socket_descriptor, &event) == -1) {
-                    fprintf(stderr, "Blad epoll_ctl ADD dla klawiatury\n");
-                    close(epoll_fd);
-                    return 1;
-                }
+        printf("Wysylam komende uzytkownika:\t %s\n", znaki);
+        //send(connection_socket_descriptor, znaki, sizeof(znaki), MSG_CONFIRM);
+        int rozmiar = strlen(znaki);
 
-                char* buf[100] = {};
-                int read_user = read(connection_socket_descriptor, buf, sizeof(buf));
+        //printf("Dlugosc wprowadzonego stringa: %d\n", strlen(znaki));
+        //printf("Dlugosc wprowadzonego stringa: %d\n", sizeof(znaki));
+        //printf("Dlugosc wprowadzonego stringa: %d\n", rozmiar);
 
-                //char* temp;
-                *temp = malloc(strlen(path)+1);
-                strcpy(temp, path);
+        send(connection_socket_descriptor, znaki, rozmiar, MSG_CONFIRM);
 
-                connectUser(buf, temp);
-                map_clients[counter].path = temp;
-
-                printBreak();
-                printf("Operacja ACCEPT dla deskryptora: %d zakonczona sukcesem\n", connection_socket_descriptor);
-                printBreak();
-                printf("\n");
-
-                map_clients[counter].key = connection_socket_descriptor;
-                map_clients[counter].var = " ";
-
-                //handleConnection(connection_socket_descriptor, t_data_ptr, array, path, epoll_fd, &event, events);
-
-            }
-            else{
-                printf("Tu beda komendy\n");
-                printf("%d\n", events[i].data.fd);
-                KeyFunction(events[i].data.fd, connection_socket_descriptor, temp);
-            }
-        }
     }
 
     // zamknięcie gniazda
@@ -179,9 +234,12 @@ int main(int argc, char* argv[])
             //pthread_mutex_destroy(locks[i]);
     //pthread_mutex_destroy(&(t_data_ptr->thread_data_mutex));
 
-    // uwalnianie pamięci
-    free(t_data_ptr->client_socketfd);
-    free(t_data_ptr);
+
+    sleep(10000);
+    close(connect_result);
+    return 0;
+}
+
 
     return(0);
 }

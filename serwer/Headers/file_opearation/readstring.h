@@ -20,7 +20,7 @@ char** buf_split(char* a_str, const char a_delim){
     char delim[2];
     delim[0] = a_delim;
     delim[1] = 0;
-    printf("Wprowadzony string:\t\t\t %s\n", a_str);
+    printf("Wprowadzony string:\t\t\t%s\n", a_str);
     /* Count how many elements will be extracted. */
     while (*tmp){
         if (a_delim == *tmp){
@@ -35,6 +35,8 @@ char** buf_split(char* a_str, const char a_delim){
        knows where the list of returned strings ends. */
     count++;
     result = malloc(sizeof(char*) * count);
+
+
     if (result){
         size_t idx  = 0;
         char* token = strtok(a_str, delim);
@@ -48,98 +50,80 @@ char** buf_split(char* a_str, const char a_delim){
         assert(idx == count - 1);
         *(result + idx) = 0;
     }
+    free(*tmp);
     return result;
 }
 
-//WPISANIE WPISANYCH WARTOSCI DO TABLICY
-void enterArray(char** tokens, char*** result){
-    int counter = 0;
-    int i;
-
-    if (tokens) {
-        int i;
-        for (i = 0; *(tokens + i); i++) {
-            counter++;
-        }
-    }
-    char* array_arguments[counter - 1];
-    if (tokens) {
-        int i;
-        for (i = 1; *(tokens + i); i++) {
-            strcpy(array_arguments[i - 1], *(tokens + i));
-            (*result)[i] = (*tokens + i);
-            //array_arguments[i - 1] = *(tokens + i);
-            printf("Buffor: %s\n", array_arguments[i - 1]);
-            char* path = (char*)malloc(strlen(array_arguments[i - 1]) + 1);
-            //free(*(tokens + i));
-        }
-    }
-    //char* folder_sciezka = (char*)malloc(strlen(dirname)+1);
-
-    for (i = 1; i < counter; i++) {
-        char *path = (char *) malloc(strlen(array_arguments[i - 1]) + 1);
-        strcpy(path, array_arguments[i]);
-        (result[i]) = *path;
-    }
-}
-
-
 
 //ODCZYT PIERWSZEJ WCZYTANEJ WARTOSCI DO SPACJI I ZRZUTOWANIE JEJ NA WARTOSC NUMERYCZNA
-int readCommand(char** tokens, char* buf[], char* result[]){
+int readCommand(char* buf, char* result[]){
     int i;
     int j;
-    char* first = " ";
+    char* rest;
     int counter = 0;
+    char** tokens;
 
-    tokens = buf_split(buf, ' '); //<-- wynik tablica wskaznikow char
 
+    rest = strchr(buf, ':');
+    int length_first = strlen(buf) - strlen(rest);
+
+    //char* first = (char*)malloc(strlen((length_first) + 1) * sizeof(char));
+    //char* first = strdup();
+    //char* first = (char*)malloc((length_first) * sizeof(char));
+    //first = ;
+    char first[length_first + 1];
+
+    strncpy(first, buf, length_first);
+    first[length_first] = '\0';
+
+    char* second_rest = rest + 1;
+    second_rest[strlen(second_rest)] = '\0';
+
+    //printf("Second_rest: %s\n", second_rest);
+    //printf("Rozmiar second_rest: %d\n", strlen(second_rest));
+
+
+    tokens = buf_split(second_rest, ' '); //<-- wynik tablica wskaznikow char
+
+    printf("Argument: %s\n", first);
+
+
+    //COPY TO RESULT
     if(tokens){
         for (i = 0; *(tokens + i); i++){
             printf("Argument: %s\n", *(tokens + i));
+            result[i] = (*(tokens + i));
             //free(*(tokens + i));
         }
         printf("\n");
         //free(tokens);
     }
 
-    first = *(tokens + 0);
+    //char** tmp = calloc(100, sizeof(char*));
+    /*
+    if (tokens) {
+        for (j = 0; *(tokens + j); j++) {
+            char* tmp;
+            tmp = malloc(sizeof(char) * (strlen(*(tokens + j)) + 1));
+
+            strcpy(tmp, *(tokens + j));
+            result[j] = tmp;
+            //free(*(tokens + j));
+        }
+    }
+    */
+
     for (i = 0; i < COMMAND_SIZE; i++){
-        //fwrite(commands[i], 1, strlen(commands[i]), stdout);
-        if(strcmp(first, commands[i]) == 0){
-            free(*tokens + 0);
-
-            for (j = 0; *(tokens + j); j++) {
-                counter++;
-            }
-            char** tmp = calloc(40, sizeof(char*));
-            //char** result = malloc(40 * sizeof(char*));
-            counter--;
-            //char* array_arguments[counter - 1];
-
-            if (tokens) {
-                for (j = 1; *(tokens + j); j++) {
-                    //(*result)[j - 1] = *(tokens + j + 1);
-                    *(tmp + j - 1) = *(tokens + j);
-                    //strcpy((*result)[j - 1], *(tokens + j));
-                    //strcpy(tmp[j], *(tokens + j + 1));
-                    //*(tmp + j) = "5";
-                    //printf("Buffor: %s\n", (tmp + j - 1));
-                    //free(*(tokens + i));
-                    result[j - 1] = *(tmp + j - 1);
-                }
-                //*result = tmp;
-            }
-
-            //enterArray(tokens, &result);
+        if(strcmp(first, PKW_converter[i].key) == 0){
             return i;
         }
-        else
-            printf("Lancuchy nie sa rowne\n");
+        //else
+            //printf("Lancuchy nie sa rowne\n");
     }
-}
-//***********************
 
+    return -1;
+
+}
 
 #endif /* !SERWER_READSTRING_H */
 

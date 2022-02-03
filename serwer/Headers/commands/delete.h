@@ -7,18 +7,18 @@
 #ifndef SERWER_DELETE_H
 #define SERWER_DELETE_H
 
-void deleteCommand(void *t_data_ptr, char* arguments[]){
+void deleteCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
     char buf[100];
-    struct user_data *user = (struct user_data *)t_data_ptr;
 
-    int client_socket = user->user_socket;
-    char* result = user->path;
+    int client_socket   = client_data->client_socket;
+    char* result        = client_data->path;
+    char* path          = (char*)malloc(strlen(result)+1);
 
-    char* path = (char*)malloc(strlen(result)+1);
     strcpy(path, result);
 
     printBreak();
     printf("%s\n", path);
+
     //sprawdz czy istnieje glowny folder uzytkownika
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
@@ -43,7 +43,6 @@ void deleteCommand(void *t_data_ptr, char* arguments[]){
 
     FILE* file_descriptor = fopen(path, "r");
 
-    //printf("%d\n", file_descriptor);
     if (file_descriptor == 0) {
         printf("Błąd przy próbie USUWANIA pliku!\n");
         printf("Podany plik o danej nazwie nie istnieje!\n");
@@ -54,7 +53,7 @@ void deleteCommand(void *t_data_ptr, char* arguments[]){
         remove(path);
         printf("USUNIETO PODANY PLIK!\n");
     }
-
-
+    fclose(file_descriptor);
+    free(path);
 }
 #endif //SERWER_DELETE_H

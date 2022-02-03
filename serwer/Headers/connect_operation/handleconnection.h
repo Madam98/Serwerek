@@ -19,14 +19,14 @@ void createInfo(int create_result){
 
 void handleInfo(struct thread_data_t t_data_ptr){
     printBreak();
-    printf("Nowe połączenie. Gniazdo klienta: %d\n", connection_socket_descriptor);
+    //printf("Nowe połączenie. Gniazdo klienta: %d\n", connection_socket_descriptor);
     printf("lock mutex: %d\n", t_data_ptr.thread_data_mutex);
     printBreak();
     printf("\n");
 }
 
 // funkcja obsługująca połączenie z nowym klientem
-void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_data_ptr, struct array_data_clients *array, char* path, int epoll_fd, struct epoll_event event, struct epoll_event *events)
+void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_data_ptr, struct array_data_clients *array, char* path, int epoll_fd, struct epoll_event *event, struct epoll_event *events)
 {
     // sprawdzenie, czy jest wolne miejsce w współdzielonej tablicy z numerami połączonych gniazd
     pthread_mutex_lock(&(t_data_ptr->thread_data_mutex));
@@ -43,7 +43,7 @@ void handleConnection(int connection_socket_descriptor, struct thread_data_t *t_
         user.user_socket = connection_socket_descriptor;
         user.path = path;
         user.epoll_fd = epoll_fd;
-        user.epoll_event = event;
+        user.epoll_event = *event;
         user.epoll_events = events;
 
         //memcpy(&user.epoll_events, events, sizeof(user.epoll_events));

@@ -15,23 +15,9 @@
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
-					"linkDirectories" : 
-					[
-						"/usr/lib/gcc/x86_64-linux-gnu/9",
-						"/usr/lib/x86_64-linux-gnu",
-						"/usr/lib",
-						"/lib/x86_64-linux-gnu",
-						"/lib"
-					],
+					"linkDirectories" : [],
 					"linkFrameworkDirectories" : [],
-					"linkLibraries" : 
-					[
-						"gcc",
-						"gcc_s",
-						"c",
-						"gcc",
-						"gcc_s"
-					]
+					"linkLibraries" : []
 				},
 				"path" : "/usr/bin/cc",
 				"version" : "9.3.0"

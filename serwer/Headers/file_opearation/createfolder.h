@@ -8,43 +8,6 @@
 #define SERWER_CREATEFOLDER_H
 
 
-void connectUser(char* buf, struct thread_data_t t_data_ptr){
-    printf("\n");
-    printBreak();
-    printf("Nazwa uzytkownika: %s\n", buf);
-
-    char* path = t_data_ptr.path;
-    //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
-    //strcpy(path, t_data_ptr.path);
-
-    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
-    //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
-    createFolder(path, buf);
-    printf("Scizka utworzonego folderu: \n\t%s\n", path);
-    printBreak();
-    printf("\n");
-}
-
-
-
-void connectUser_user_data(char* buf, struct user_data t_data_ptr){
-    printf("\n");
-    printBreak();
-    printf("Nazwa uzytkownika: %s\n", buf);
-
-    char* path = t_data_ptr.path;
-    //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
-    //strcpy(path, t_data_ptr.path);
-
-    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
-    //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
-    createFolder(path, buf);
-    printf("Sciezka utworzonego folderu: \n\t%s\n", path);
-    printBreak();
-    printf("\n");
-}
-
-
 int ExistsFolder(char* path){
     DIR *dir = opendir(path);
     if (!(dir)){
@@ -64,7 +27,6 @@ void createFolder(char* path, char* dirname) {
     //char* path_temp;
     //strcpy(path_temp, path);
 
-
     char* folder_sciezka = (char*)malloc(strlen(dirname)+1);
     strcat(path, "/");
     strcpy(folder_sciezka, dirname);
@@ -76,8 +38,49 @@ void createFolder(char* path, char* dirname) {
         mkdir(path, 0777);
     }
 
+    free(folder_sciezka);
     //pod koniec wywolania funkcji znajdujemy sie w folderze DOCUMENTS
 }
+
+void connectUser(char* buf, char* user_path){
+    printf("\n");
+    printBreak();
+    printf("Nazwa uzytkownika: %s\n", buf);
+
+    char* path = strdup(user_path);
+    strcpy(path, user_path);
+
+    //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
+    //strcpy(path, t_data_ptr.path);
+
+    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
+    //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
+    createFolder(path, buf);
+    printf("Sciezka utworzonego folderu: \n\t%s\n", path);
+    printBreak();
+    printf("\n");
+
+    free(path);
+}
+
+
+void connectUser_user_data(char* buf, struct user_data t_data_ptr){
+    printf("\n");
+    printBreak();
+    printf("Nazwa uzytkownika: %s\n", buf);
+
+    char* path = t_data_ptr.path;
+    //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
+    //strcpy(path, t_data_ptr.path);
+
+    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
+    //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
+    createFolder(path, buf);
+    printf("Sciezka utworzonego folderu: \n\t%s\n", path);
+    printBreak();
+    printf("\n");
+}
+
 
 void folderInfo(char* path, char* info){
     printBreak();

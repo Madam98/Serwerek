@@ -6,21 +6,15 @@
 #ifndef SERWER_SHARE_H
 #define SERWER_SHARE_H
 
-void shareCommand(void *t_data){
+void shareCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
 
-    printf("KOMENDA W PRZYGOTOWANIU!!\n");
-    //POMYSLEC NAD ROZWIAZANIEM
-    //Mamy dwie opcje udostepniania/zabezpieczenia udzielenia dostepu
-    //Number uno (zabezpieczenie)
-    //Przy tworzeniu pliku tworzymy rowniez uzytkownika na linuksie. Tworzymy rowniez grupe o takiej samej nazwie
-    //pryz udostepnianiu uzytkownikowi dodajemy go do grupy uzytkownika wlasciciela
+    client_data->share_file_descriptor;
 
-    //Number secondo (udostepnienie)
-    //Przy kazdym zalogowaniu sie uzytkownika musimy identyfikowac czy ma stworzony folder ze swoja nazwa i dokument
-    //Identyfikacja? Narazie wpisujemy przy laczeniu nazwe uzytkownika (po stronie klienta). Potem mozna zamienic na adres ip
-    //Po zalogowaniu i sprawdzeniu czy dokument istnieje program pobiera deskryptor pliku -> pobiera liste zalogowanych uzytkownikow i przekazuje je do udostepnienia
+    char* end;
+    int number_temp = strtol(*(arguments + 0), &end, 10);
 
-
+    client_data->share_file_descriptor = client_data->file_descriptor;
+    client_data->share_user = "julia";
 
 
 
