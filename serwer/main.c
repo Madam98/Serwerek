@@ -283,7 +283,7 @@ int main(int argc, char* argv[])
                     printf("KONIEC EPOLLIN\n");
                     printf("Socket_fd: %d\n", socket_fd);
                 }
-            
+
             else if (events[i].events&EPOLLOUT){ //If there is data to send
                 printf("Event:\t\t\t\t\t\t EPOLLOUT\n");
                 socket_fd = events[i].data.fd;
