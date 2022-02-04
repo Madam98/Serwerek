@@ -38,7 +38,7 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
     printf("Sciezka otwieranego pliku: \n\t%s\n", buf);
 
     FILE* file_descriptor ;
-    file_descriptor = fopen(buf, "w");
+    file_descriptor = fopen(buf, "w+");
 
     //printf("%d\n", file_descriptor);
     if (file_descriptor > 0) {

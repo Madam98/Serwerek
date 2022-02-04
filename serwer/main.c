@@ -116,7 +116,6 @@ int main(int argc, char* argv[])
     folderInfo(path, info);
 
 
-
     //OBSLUGA POLACZEN Z UZYTKOWNIKAMI
     int nfds;
     int i;
@@ -188,6 +187,11 @@ int main(int argc, char* argv[])
                 our_clients_data[counter].client_socket   = client_socket_descriptor;
                 our_clients_data[counter].counter         = counter;
                 our_clients_data[counter].file_descriptor = 0;
+                our_clients_data[counter].share_user      = "";
+                //our_clients_data[counter].shared_with_me_descriptors = "";
+                //our_clients_data[counter].share_file_descriptor = "";
+
+
                 counter++;
 
                 printBreak();
@@ -264,7 +268,7 @@ int main(int argc, char* argv[])
                     //Example(wsk_temp, socket_fd, temp_struct);
                     ExecuteCommand(wsk_temp, socket_fd, temp_struct);
                     ShowListFile(temp_struct);
-                    ShowClients(our_clients_data);
+                    ShowClients(our_clients_data, counter);
 
 
                     printf("WPISANY FILE DESCRIPTOR: %d\n", temp_struct->file_descriptor);

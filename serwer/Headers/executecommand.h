@@ -127,11 +127,11 @@ int ShowListFile(struct clients_struct* client_data){
     return 0;
 }
 
-int ShowClients(struct clients_struct* client_data) {
+int ShowClients(struct clients_struct* client_data, int counter) {
     int i;
     printBreak();
     printf("KLIENCI\n");
-    for (i = 0; i < 5; i++){
+    for (i = 0; i < counter; i++){
         if(client_data[i].client_socket != 0) {
             printf("\n");
             printf("Nazwa klienta:\t\t\t %s\n", client_data[i].name);
@@ -141,8 +141,10 @@ int ShowClients(struct clients_struct* client_data) {
             printf("Share with_me_descriptor:%d\n", client_data[i].share_file_descriptor);
 
             int j;
-            for (j = 0; j < 5; j++){
-                if(client_data[i].share_user = client_data[j].name && i != j)
+            for (j = 0; j < counter; j++){
+                int compare = strcmp(client_data[i].share_user, client_data[j].name);
+
+                if(compare == 0 && i != j)
                     client_data[j].shared_with_me_descriptors = client_data[i].share_file_descriptor;
             }
         }

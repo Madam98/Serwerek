@@ -17,9 +17,6 @@ void shareCommand(struct clients_struct *client_data, char *arguments[], int siz
     client_data->share_user = "julia";
 
 
-
-
-
 }
 
 

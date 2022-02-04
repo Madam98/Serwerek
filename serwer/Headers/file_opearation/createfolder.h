@@ -38,7 +38,7 @@ void createFolder(char* path, char* dirname) {
         mkdir(path, 0777);
     }
 
-    free(folder_sciezka);
+    //free(folder_sciezka);
     //pod koniec wywolania funkcji znajdujemy sie w folderze DOCUMENTS
 }
 
