@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.Pane?>
+<VBox alignment="TOP_CENTER" prefHeight="634.0" prefWidth="923.0" spacing="20.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.client.skclient.controllers.EditorController">
+    <MenuBar>
+      <menus>
+         <Menu mnemonicParsing="false" text="Plik">
+           <items>
+               <MenuItem mnemonicParsing="false" onAction="#onDeleteFileClick" text="Usuń" />
+               <MenuItem mnemonicParsing="false" onAction="#onCopyFileClick" text="Utwórz kopię" />
+               <MenuItem mnemonicParsing="false" onAction="#onRenameFileClick" text="Zmień nazwę" />
+               <MenuItem mnemonicParsing="false" onAction="#onCloseFileClick" text="Zamknij" />
+           </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Udostępnianie">
+           <items>
+               <MenuItem mnemonicParsing="false" text="Udostępnij" />
+               <MenuItem mnemonicParsing="false" text="Zakończ udostępnianie" />
+           </items>
+         </Menu>
+      </menus></MenuBar>
+    <VBox fx:id="mainTextBox" VBox.vgrow="ALWAYS" style="-fx-background-color: red" >
+
+    </VBox>
+</VBox>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="634.0" prefWidth="923.0" spacing="20.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.client.skclient.controllers.LogInController">
+   <children>
+
+       <Label text="Podaj adres IP serwera"></Label>
+      <TextField fx:id="serverAddressTF" alignment="CENTER">
+         <VBox.margin>
+            <Insets left="300.0" right="300.0" />
+         </VBox.margin>
+      </TextField>
+       <Label text="Podaj port serwera"></Label>
+       <TextField fx:id="serverPortTF" alignment="CENTER">
+           <VBox.margin>
+               <Insets left="300.0" right="300.0" />
+           </VBox.margin>
+       </TextField>
+       <Label text="Podaj nazwę użytkownika"></Label>
+       <TextField fx:id="usernameTF" alignment="CENTER">
+       <VBox.margin>
+           <Insets left="300.0" right="300.0" />
+       </VBox.margin>
+   </TextField>
+      <Button mnemonicParsing="false" onAction="#onLogInButtonClick" text="Zaloguj">
+      </Button>
+      <Label fx:id="warningLabel" textFill="#d01d1d" visible="false">
+      </Label>
+   </children>
+</VBox>
