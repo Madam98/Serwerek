@@ -80,12 +80,12 @@ public class MainController {
     }
 
     @FXML
-    protected void onCreateFileClick(ActionEvent actionEvent) throws IOException {
+    protected void onCreateFileButtonClick(ActionEvent actionEvent) throws IOException {
 
         String filename = filenameTF.getText();
         file.setFilename(filename);
-//            file.createFile(filename);
-        file.testCreateFile();
+        file.createFile(filename);
+//        file.testCreateFile();
         goToTextEditor();
     }
 

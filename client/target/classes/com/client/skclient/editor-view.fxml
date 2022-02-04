@@ -13,8 +13,9 @@
       <menus>
          <Menu mnemonicParsing="false" text="Plik">
            <items>
-               <MenuItem mnemonicParsing="false" onAction="#onSaveFileAsClick" text="Zapisz jako" />
                <MenuItem mnemonicParsing="false" onAction="#onDeleteFileClick" text="Usuń" />
+               <MenuItem mnemonicParsing="false" onAction="#onCopyFileClick" text="Utwórz kopię" />
+               <MenuItem mnemonicParsing="false" onAction="#onRenameFileClick" text="Zmień nazwę" />
                <MenuItem mnemonicParsing="false" onAction="#onCloseFileClick" text="Zamknij" />
            </items>
          </Menu>

@@ -33,52 +33,53 @@ public class TextFile {
                 loadedText += buffer;
             }
         }
-        System.out.print("Zakończono czytanie. Odebrano " + loadedText.length() + " znaków.\n");
+        System.out.println("Zakończono czytanie. Odebrano " + loadedText.length() + " znaków.");
     }
 
-    public void testCreateFile() throws IOException {
-        System.out.print("Testowanie odbierania pliku lorem.txt\n");
-        client.getWriter().println(client.getUsername());
-        client.getWriter().println("touch "+filename);
-        receiveFileContent();
-    }
+//
+//    public void testCreateFile() throws IOException {
+//        System.out.print("Testowanie odbierania pliku lorem.txt\n");
+//        client.getWriter().println(client.getUsername());
+//        client.getWriter().println("touch:"+filename);
+//        receiveFileContent();
+//    }
 
     static public void createFile(String filename) throws IOException {
         if (checkIfLegalFilename(filename)) {
-            System.out.print("Utwórz plik: touch " + filename + " " + client.getUsername());
-            // touch <filename> <username>
-            client.getWriter().println(client.getUsername());
-            client.getWriter().println("touch "+filename);
-//            client.getReader().readLine();
-
+            System.out.println("Utwórz plik: touch:" + filename);
+            client.getWriter().println("touch:" + filename);
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Błąd");
-            alert.setHeaderText("Błąd");
-            alert.setContentText("Podana nazwa pliku zawiera niedozwolone znaki.");
-            alert.showAndWait();
+            System.out.println("Podano niedozwoloną nazwę pliku:" + filename);
         }
     }
 
     public void openFile() {
-        System.out.print("Otwórz plik: open " + filename + " " + client.getUsername());
-        client.getWriter().println(client.getUsername());
-        client.getWriter().println("open "+filename);
-//        client.getReader().readLine();
+        System.out.println("Otwórz plik: enter:" + filename);
+        client.getWriter().println("enter:"+filename);
     }
 
-    public void deleteFile(String filename) {
-        System.out.print("Otwórz plik: open " + filename + " " + client.getUsername());
-        client.getWriter().println(client.getUsername());
-        client.getWriter().println("open "+filename);
-//        client.getReader().readLine();
+    public void deleteFile() {
+        System.out.println("Usuń plik: delete:" + filename);
+        client.getWriter().println("delete:"+filename);
     }
 
-    public void copyFile(String filename) {
-        System.out.print("Otwórz plik: open " + filename + " " + client.getUsername());
-        client.getWriter().println(client.getUsername());
-        client.getWriter().println("open "+filename);
-//        client.getReader().readLine();
+    public void copyFile() {
+        System.out.println("Utwórz kopię pliku: copy:" + filename);
+        client.getWriter().println("copy:"+filename);
+    }
+
+    public void renameFile(String newname) {
+        System.out.println("Zmień nazwę pliku: newname:" + filename + " > " +newname);
+        client.getWriter().println("newname:" + filename + " > " +newname);
+
+        // TODO:przydałoby się jakieś potwierdzenie czy zmiana przebiegła poprawnie
+        this.filename = newname;
+        System.out.println("Zmieniono nazwę pliku!");
+    }
+
+    public void closeFile() {
+        System.out.println("Zamknij plik: close:" + filename);
+        client.getWriter().println("close:" + filename);
     }
 
     public void setFilename(String filename) {

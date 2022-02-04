@@ -42,7 +42,7 @@
                     <Insets left="300.0" right="300.0" />
                 </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#onCreateFileClick" text="utwórz" />
+            <Button mnemonicParsing="false" onAction="#onCreateFileButtonClick" text="utwórz" />
         </children>
         <padding>
             <Insets right="30.0" />

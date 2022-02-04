@@ -80,16 +80,33 @@ public class EditorController {
         alert.setHeaderText("Czy na pewno chcesz usunąć plik?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            // TODO: SEND DELETE COMMAND TO SERVER
+            file.deleteFile();
             goToMain();
         }
     }
 
     @FXML
-    protected void onCloseFileClick(ActionEvent actionEvent) throws IOException {
-        // TODO: let server know that file is closed
-        goToMain();
+    protected void onCopyFileClick(ActionEvent actionEvent) {
+        file.copyFile();
+    }
 
+    @FXML
+    protected void onRenameFileClick(ActionEvent actionEvent) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Zmień nazwę pliku");
+        dialog.setHeaderText("Podaj nową nazwę");
+        Optional<String> result = dialog.showAndWait();
+        String filename = "";
+        if (result.isPresent()) {
+            filename = result.get();
+            file.renameFile(filename);
+        }
+    }
+
+    @FXML
+    protected void onCloseFileClick(ActionEvent actionEvent) throws IOException {
+        file.closeFile();
+        goToMain();
     }
 
     public void initialize(Client client, TextFile file) {

@@ -47,11 +47,11 @@ public class LogInController {
             client.connect(serverAddress, serverPort);
 //            client.connect(serverAddress, serverPort, username);
 
-            // wyślij wiadomość testową
-            OutputStream os = client.getConnectionSocket().getOutputStream();
+//            // wyślij wiadomość testową
+//            OutputStream os = client.getConnectionSocket().getOutputStream();
             return true;
 
-        } catch(IOException ex) {
+        } catch(IOException | InterruptedException ex) {
             System.out.print("Nie udało się nawiązać połączenia z serwerem:: " + ex);
             warningLabel.setText("Nie udało się nawiązać połączenia z serwerem.");
             warningLabel.setVisible(true);
