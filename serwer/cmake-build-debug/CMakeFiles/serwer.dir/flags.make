@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/oem/Desktop/Serwerek/serwer/.
+C_INCLUDES = -I/home/oem/Desktop/16.02/Serwerek/serwer/.
 
 C_FLAGS = -g -std=gnu99
 

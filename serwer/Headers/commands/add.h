@@ -12,17 +12,13 @@ void addCommand(struct clients_struct *client_data, char *arguments[], int size_
     //POPRAWIC!
     int i;
     int name_size = 0;
+    char* path;
 
     for (i = 0; i < size_of_array; i++){
         name_size = name_size + strlen(arguments[i]);
     }
 
-    //char* name = (char*)malloc(name_size + 1);
-    //char* name = strdup (arguments);
-
     char* name = (char*)malloc(strlen(*(arguments + 0)) + 1);
-
-
     for (i = 0; i < size_of_array; i++) {
         if(i == 0){
             strcpy(name, "");
@@ -38,22 +34,15 @@ void addCommand(struct clients_struct *client_data, char *arguments[], int size_
 
     client_data->name = (char*)malloc(strlen(name) + 1);
     strcpy(client_data->name, name);
-
-
-    //client_data->name == wsk_name;
     connectUser(client_data->name, client_data->path);
-
-    char* path;
     strcpy(path, client_data->path);
     strcat(path, "/");
     strcat(path, client_data->name);
-
     strcpy(client_data->path, path);
 
     //free(name);
     //free(wsk_name);
     //free(temp);
-
 };
 
 

@@ -14,7 +14,7 @@ struct thread_data_t
     int *client_socketfd;
     int number_of_clients;      //<---teraz zalogowanych
     int last_connected;         //<---ostatnio polaczony
-    char name_identificator;    //<---identyfikator klienta (klient na start wpisuje). Tworzony na podstawie tego jest tworzony/otwierany odpowiedni folder z dokumentami
+    char* name_identificator;    //<---identyfikator klienta (klient na start wpisuje). Tworzony na podstawie tego jest tworzony/otwierany odpowiedni folder z dokumentami
     char* path;
 
     // mutex do operacji na danych w strukturze
@@ -46,21 +46,17 @@ struct clients_struct
     int     client_socket;
     char*   name;
     char*   path;
+    char*   global_path;
     int     file_descriptor;
-
     char*   share_user;
-    int     share_file_descriptor;
 
+    char*   share_path; //<---przerobic na tablice
+    int     send_share_file_descriptor; //<---przerobic na tablice
+    int     FLAG_TO_SENT;
+
+    char    open_file_descriptor_path[1000];
     int     shared_with_me_descriptors;
-
     int     counter;
-    char*   var;
 };
-
-struct number_map
-{
-    int     number;
-};
-
 
 #endif /* !SERWER_STRUCTS_H */

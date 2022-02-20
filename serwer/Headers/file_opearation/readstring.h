@@ -15,7 +15,7 @@ char** buf_split(char* a_str, const char a_delim){
     printf("FUNKCJA BUF_SPLIT\n");
     char** result    = 0;
     size_t count     = 0;
-    char* tmp        = a_str;
+    char* tmp        = a_str; //<---poprawiony warning
     char* last_comma = 0;
     char delim[2];
     delim[0] = a_delim;
@@ -36,7 +36,6 @@ char** buf_split(char* a_str, const char a_delim){
     count++;
     result = malloc(sizeof(char*) * count);
 
-
     if (result){
         size_t idx  = 0;
         char* token = strtok(a_str, delim);
@@ -50,7 +49,7 @@ char** buf_split(char* a_str, const char a_delim){
         assert(idx == count - 1);
         *(result + idx) = 0;
     }
-    free(*tmp);
+
     return result;
 }
 

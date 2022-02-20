@@ -5,7 +5,7 @@
 
 #ifndef SERWER_TEXTANIMATION_H
 #define SERWER_TEXTANIMATION_H
-textAnimation(){
+int textAnimation(){
     int counter = 0;
     while(counter <= 5) {
         long tms = 300;

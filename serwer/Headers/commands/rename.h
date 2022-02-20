@@ -9,31 +9,25 @@
 
 void renameCommand(struct clients_struct *client_data, char *arguments[], int size_of_array){
     char buf[100];
-
-    int client_socket   = client_data->client_socket;
-    //char* result        = client_data->client_socket;
-    //char* path          = (char*)malloc(strlen(result)+1);
-
-    char* path      = strdup(client_data->path);
-    char* new_path  = strdup(client_data->path);
+    int client_socket = client_data->client_socket;
+    char* path        = strdup(client_data->path);
+    char* new_path    = strdup(client_data->path);
 
     strcpy(path, client_data->path);
     strcpy(new_path, client_data->path);
 
     printBreak();
     printf("%s\n", path);
-    //sprawdz czy istnieje glowny folder uzytkownika
+
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
-        perror(1);
+        //perror("1");
     }
     printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
     printf("Na sockecie:\t\t\t %d\n", client_socket);
 
     printBreak();
     printf("\n");
-
-    //char* new_path = (char*)malloc(strlen(result)+1);
 
     printBreak();
     strcat(path, "/");
@@ -54,17 +48,12 @@ void renameCommand(struct clients_struct *client_data, char *arguments[], int si
             i++;
         }
     }
-
     strcat(path, ".txt");
     strcat(new_path, ".txt");
-
-
     printf("Sciezka zmienianego pliku: \n\t%s\n", path);
-    //printf("Sciezka nowego pliku: \n\t%s\n", new_path);
 
     FILE* file_descriptor = fopen(path, "r");
 
-    //printf("%d\n", file_descriptor);
     if (file_descriptor == 0) {
         printf("Błąd przy próbie ZMIENIANIA NAZWY pliku!\n");
         printf("Podany plik o danej nazwie nie istnieje!\n");
@@ -73,7 +62,6 @@ void renameCommand(struct clients_struct *client_data, char *arguments[], int si
         char ch;
         FILE* new_file_descriptor = fopen(new_path, "r");
         printf("Sciezka tworzonego pliku: \n\t%s\n", path);
-
         rename(path, new_path);
         printf("Udalo sie ZMIENIC nazwe pliku!\n");
     }

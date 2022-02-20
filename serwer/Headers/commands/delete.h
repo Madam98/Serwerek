@@ -22,7 +22,7 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
     //sprawdz czy istnieje glowny folder uzytkownika
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
-        perror(1);
+        //perror("1");
     }
     printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
     printf("Na sockecie:\t\t\t %d\n", client_socket);
@@ -49,7 +49,6 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
     }
     else{
         printf("Sciezka istniejacego pliku: \n\t%s\n", path);
-        close(file_descriptor);
         remove(path);
         printf("USUNIETO PODANY PLIK!\n");
     }

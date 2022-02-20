@@ -9,7 +9,6 @@ void printBreak(){
 }
 
 //-------------------------------------------------------------------------------
-
 void createThreadClient(int max_num_of_clients, struct thread_data_t *t_data_ptr){
     t_data_ptr->client_socketfd = malloc(sizeof(int) * max_num_of_clients);
     t_data_ptr->number_of_clients = 0;
@@ -18,7 +17,8 @@ void createThreadClient(int max_num_of_clients, struct thread_data_t *t_data_ptr
     for( int i = 0; i < max_num_of_clients; i++){
         t_data_ptr->client_socketfd[i] = 0;
     }
-    t_data_ptr->name_identificator = "";
+    //t_data_ptr->name_identificator = "";
+    strcpy(t_data_ptr->name_identificator, "");
 }
 
 void createArrayClient(struct array_data_clients *array){
@@ -52,9 +52,9 @@ void initAdreessServer(struct sockaddr_in *server_address){
 
 
 //-------------------------------------------------------------------------------
-void checkServerSocketDescriptor(int server_socket_descriptor, char* argv[]){
+void checkServerSocketDescriptor(int server_socket_descriptor, char* argv){
     if (server_socket_descriptor < 0){
-        fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda..\n", argv[0]);
+        fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda..\n", argv);
         exit(1);
     }
 }
@@ -73,9 +73,9 @@ void socketInfo(int server_socket_descriptor){
 
 
 //-------------------------------------------------------------------------------
-void checkBindResult(int bind_result, char* argv[]){
+void checkBindResult(int bind_result, char* argv){
     while (bind_result < 0){
-        fprintf(stderr, "%s: Błąd przy próbie dowiązania adresu IP i numeru portu do socketu.\n", argv[0]);
+        fprintf(stderr, "%s: Błąd przy próbie dowiązania adresu IP i numeru portu do socketu.\n", argv);
         printf("Port zajety\n\n");
         sleep(1);
         //exit(1);
@@ -92,9 +92,9 @@ void bindInfo(){
 
 
 //-------------------------------------------------------------------------------
-void checkListen(int listen_result, char* argv[]){
+void checkListen(int listen_result, char* argv){
     if (listen_result < 0) {
-        fprintf(stderr, "%s: Błąd przy próbie ustawienia wielkości kolejki.\n", argv[0]);
+        fprintf(stderr, "%s: Błąd przy próbie ustawienia wielkości kolejki.\n", argv);
         exit(1);
     }
 }

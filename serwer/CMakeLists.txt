@@ -21,10 +21,8 @@ add_executable(serwer main.c cmake-build-debug/
         Headers/file_opearation/textAnimation.h
         Headers/connect_operation/createconnectionfunctions.h
         Headers/arrayfunctions.h
-        Headers/thread/threadfunctions.h
-        Headers/connect_operation/handleconnection.h
         Headers/commands/touch.h
         Headers/commands/share.h
         Headers/commands/list.h
-        Headers/handler/sigsegv.h Headers/connect_operation/handlearrayofclients.h Headers/commands/delete.h Headers/commands/copy.h Headers/commands/rename.h Headers/executecommand.h Headers/commands/add.h Headers/commands/enter_file.h Headers/commands/message.h)
+        Headers/handler/sigsegv.h Headers/commands/delete.h Headers/commands/copy.h Headers/commands/rename.h Headers/executecommand.h Headers/commands/add.h Headers/commands/enter_file.h Headers/commands/message.h Headers/lists.h)
 target_link_libraries(serwer pthread)

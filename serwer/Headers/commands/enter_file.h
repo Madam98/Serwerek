@@ -17,7 +17,7 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
     //sprawdz czy istnieje
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
-        perror(1);
+        //perror("1");
     }
 
     printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
@@ -37,21 +37,38 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
     strcat(buf, ".txt");
     printf("Sciezka otwieranego pliku: \n\t%s\n", buf);
 
-    FILE* file_descriptor ;
-    file_descriptor = fopen(buf, "w");
+
+    strcpy(client_data->open_file_descriptor_path, buf);
+    FILE* file_descriptor;
+    file_descriptor = fopen(buf,  "rw+");
+
+    //WYSYLAMY PLIK UZYTKOWNIKOWI
+    char c;
+    char message[10] = "";
+    int counter = 0;
+
+    while (c != EOF){
+        c = fgetc(file_descriptor);
+        strcat(message, c);
+        counter++;
+        if (counter <= 10){
+            counter = 0;
+            write(client_data->client_socket, c, 10);
+        }
+    }
 
     //printf("%d\n", file_descriptor);
+    /*
     if (file_descriptor > 0) {
-        printf("Błąd przy próbie TWORZENIA pliku!\n");
-        printf("Podany plik o danej nazwie juz istnieje!\n");
-        printf("Sciezka istniejacego pliku: \n\t%s\n", buf);
+        printf("Otworzono plik o podanej nazwie pod sciezka: \n\t%s\n", buf);
+        client_data->open_file_descriptor = file_descriptor;
     }
     else{
-        file_descriptor = fopen(buf, "w");
-        printf("Otworzono plik o podanej nazwie pod sciezka: \n\t%s\n", buf);
+        printf("Błąd przy próbie OTWORZENIA pliku!\n");
     }
+    */
 
-    client_data->file_descriptor = file_descriptor->_fileno;
+
 
     printBreak();
     free(buf);

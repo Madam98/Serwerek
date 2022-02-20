@@ -1,6 +1,7 @@
-CMakeFiles/serwer.dir/main.c.o: /home/oem/Desktop/Serwerek/serwer/main.c \
+CMakeFiles/serwer.dir/main.c.o: \
+ /home/oem/Desktop/16.02/Serwerek/serwer/main.c \
  /usr/include/stdc-predef.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/headers/headers.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/headers/headers.h \
  /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -132,25 +133,23 @@ CMakeFiles/serwer.dir/main.c.o: /home/oem/Desktop/Serwerek/serwer/main.c \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/ucontext.h \
  /usr/include/x86_64-linux-gnu/bits/indirect-return.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/data/variables.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/data/structs.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/file_opearation/readstring.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/file_opearation/msleep.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/file_opearation/textAnimation.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/connect_operation/createconnectionfunctions.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/arrayfunctions.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/thread/threadfunctions.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/connect_operation/handleconnection.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/connect_operation/handlearrayofclients.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/handler/sigsegv.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/file_opearation/createfolder.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/executecommand.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/add.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/touch.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/share.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/list.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/delete.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/copy.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/rename.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/enter_file.h \
- /home/oem/Desktop/Serwerek/serwer/./Headers/commands/message.h
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/data/variables.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/data/structs.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/file_opearation/readstring.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/file_opearation/textAnimation.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/file_opearation/msleep.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/connect_operation/createconnectionfunctions.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/handler/sigsegv.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/file_opearation/createfolder.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/executecommand.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/add.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/touch.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/share.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/lists.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/list.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/delete.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/copy.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/rename.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/enter_file.h \
+ /home/oem/Desktop/16.02/Serwerek/serwer/./Headers/commands/message.h
