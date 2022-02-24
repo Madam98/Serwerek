@@ -48,10 +48,8 @@ struct clients_struct
     char*   path;
     char*   global_path;
     int     file_descriptor;
-    char*   share_user;
-
-    char*   share_path; //<---przerobic na tablice
-    int     send_share_file_descriptor; //<---przerobic na tablice
+    char*   share_path[10];                 //<---przerobic na tablice
+    int     send_share_file_descriptor[10]; //<---przerobic na tablice
     int     FLAG_TO_SENT;
 
     char    open_file_descriptor_path[1000];

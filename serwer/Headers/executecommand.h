@@ -27,24 +27,27 @@ void ExecuteCommand(char* user_message, int client_socket, struct clients_struct
     //ODCZYTAJ WIADOMOSC OD KLIENTA OBSUGIWANEGO PRZEZ TEN WATKEKA FUNKCJE
     if (strlen(user_message) > 0) {
         //********************************************************************
-        printBreak();
-        printf("Jestem na kliencie:\t\t\t %d\n", client_socket);
-        printf("Odczytane:\t\t\t\t\t %s\n", user_message);
-        printf("\nPARAMETRY CLIENT\n");
-        printf("client_data->client_socket:  %d\n", client_data->client_socket);
-        printf("client_data->path:\t\t\t %s\n", client_data->path);
-        printf("client_data->name:\t\t\t %s\n\n", client_data->name);
+        //printBreak();
+        //printf("Jestem na kliencie:\t\t\t %d\n", client_socket);
+        printf("Odczytane:\t\t\t\t\t\t\t %s\n", user_message);
+        //printf("\nPARAMETRY CLIENT\n");
+        //printf("client_data->client_socket:  %d\n", client_data->client_socket);
+        //printf("client_data->path:\t\t\t %s\n", client_data->path);
+        //printf("client_data->name:\t\t\t %s\n\n", client_data->name);
         //********************************************************************
         choose_command = readCommand(user_message, arguments);
-        printBreak();
+        //printBreak();
 
-        for (i = 0; i < 5; i++) {
-            printf("Wynik arguments[%d]: %s\n", i, arguments[i]);
+        int i = 0;
+        while(arguments[i] != NULL){
+        //for (i = 0; i < 5; i++) {
+            printf("Wynik arguments[%d]:\t\t\t\t\t %s\n", i, arguments[i]);
+            i++;
         }
 
-        printf("\n");
-        printBreak();
-        printf("Wynik rzutowania komendy: %d\n", choose_command);
+        //printf("\n");
+        //printBreak();
+        //printf("Wynik rzutowania komendy: %d\n", choose_command);
 
         int size_of_array = 0;
         while (arguments[size_of_array] != NULL){
@@ -52,53 +55,53 @@ void ExecuteCommand(char* user_message, int client_socket, struct clients_struct
         }
         switch (choose_command) {
             case 0:
-                printf("\t KOMENDA: ADD\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mADD\033[0m\n");
                 addCommand(client_data, arguments, size_of_array);
                 break;
             case 1:
-                printf("\t KOMENDA: TOUCH\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mTOUCH\033[0m\n");
                 touchCommand(client_data, arguments, size_of_array);
                 break;
             case 2:
-                printf("\t KOMENDA: SHARE\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mSHARE\033[0m\n");
                 shareCommand(client_data, arguments, size_of_array);
                 break;
             case 3:
-                printf("\t KOMENDA: LIST\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mLIST\033[0m\n");
                 //listCommand(user);
                 break;
             case 4:
-                printf("\t KOMENDA: DELETE\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mDELETE\033[0m\n");
                 deleteCommand(client_data, arguments, size_of_array);
                 break;
             case 5:
-                printf("\t KOMENDA: COPY\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mCOPY\033[0m\n");
                 copyCommand(client_data, arguments, size_of_array);
                 break;
             case 6:
-                printf("\t KOMENDA: NEWNAME\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mNEWNAME\033[0m\n");
                 renameCommand(client_data, arguments, size_of_array);
                 break;
             // OBSLUGA PLIKOW*********
             case 7:
-                printf("\t KOMENDA: ENTER - OTWIERAM PLIK\n");
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mENTER - OTWIERAM PLIK\033[0m\n");
                 enter_file(client_data, arguments, size_of_array);
                 break;
             case 8:
-                printf("\t KOMENDA: MESSAGE\n");
+                printf("KOMENDA: MESSAGE\n");
                 message(client_data, arguments, size_of_array);
                 break;
             // ***********************
             default:
-                printf("\t KOMENDA: NIEZNANA :-(\n");
+                printf("KOMENDA: NIEZNANA :-(\n");
                 break;
         }
         printBreak();
-        printf("\n");
+        //printf("\n");
         for (i = 0; i < 40; i++) {
             arguments[i] = NULL;
         }
-        printf("Zamykam funkcje\n");
+        //printf("Zamykam funkcje\n");
     }
 }
 
@@ -110,12 +113,14 @@ int ShowListFile(struct clients_struct* client_data){
     DIR *dr = opendir(client_data->path);
 
     if (dr == NULL){  // opendir returns NULL if couldn't open directory
-        printf("Could not open current directory" );
+        printf("Problem z otworzeniem folderu" );
         return 0;
     }
 
     printBreak();
-    printf("PLIKI ZNAJDUJACE SIE W FOLDERZE\n\n");
+    mag();
+    printf("PLIKI ZNAJDUJACE SIE W FOLDERZE\n");
+    reset();
     while ((de = readdir(dr)) != NULL)
         printf("%s\n", de->d_name);
     printBreak();
@@ -128,8 +133,10 @@ int ShowClients() {
     int i;
     printBreak();
     struct node *foundLink;
+    blue();
     printf("ILOSC KLIENTOW: %d\n", length());
-    printf("KLIENCI\n");
+    reset();
+    //printf("KLIENCI\n");
     for (i = 0; i < length(); i++){
         foundLink = find(i);
         if(foundLink->client.client_socket != 0) {

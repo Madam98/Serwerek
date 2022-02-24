@@ -13,19 +13,19 @@ void copyCommand(struct clients_struct *client_data, char *arguments[], int size
     char* path      = strdup(client_data->path);
     strcpy(path, client_data->path);
 
-    printBreak();
-    printf("%s\n", path);
+    //printBreak();
+    //printf("%s\n", path);
     //sprawdz czy istnieje glowny folder uzytkownika
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         //perror("1");
     }
-    printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
-    printf("Na sockecie:\t\t\t %d\n", client_socket);
+    //printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
+    //printf("Na sockecie:\t\t\t %d\n", client_socket);
 
-    printBreak();
-    printf("\n");
-    printBreak();
+    //printBreak();
+    //printf("\n");
+    //printBreak();
 
     char* old_path = strdup(client_data->path);
 
@@ -53,12 +53,26 @@ void copyCommand(struct clients_struct *client_data, char *arguments[], int size
     else{
         char ch;
         FILE* new_file_descriptor = fopen(path, "w");
+
         printf("Sciezka tworzonego pliku: \n\t%s\n", path);
 
-        rename(path, path);
-        printf("Udalo sie ZMIENIC nazwe pliku!\n");
+        //rename(path, path);
+
+        // Read contents from file
+        ch = fgetc(file_descriptor);
+        while (ch != EOF)
+        {
+            fputc(ch, new_file_descriptor);
+            ch = fgetc(file_descriptor);
+        }
+
+        green();
+        printf("Udalo sie STWORZYC kopie pliku!\n");
+        reset();
+        fclose(new_file_descriptor);
     }
     fclose(file_descriptor);
+
     free(path);
     free(old_path);
 };

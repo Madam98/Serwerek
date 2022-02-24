@@ -12,7 +12,7 @@
 //************************************
 // funkcja odpowiedzialna za podzial. Zczytana tablica wprowadzonych argumentow
 char** buf_split(char* a_str, const char a_delim){
-    printf("FUNKCJA BUF_SPLIT\n");
+    //printf("FUNKCJA BUF_SPLIT\n");
     char** result    = 0;
     size_t count     = 0;
     char* tmp        = a_str; //<---poprawiony warning
@@ -20,7 +20,7 @@ char** buf_split(char* a_str, const char a_delim){
     char delim[2];
     delim[0] = a_delim;
     delim[1] = 0;
-    printf("Wprowadzony string:\t\t\t%s\n", a_str);
+    //printf("Wprowadzony string:\t\t\t%s\n", a_str);
     /* Count how many elements will be extracted. */
     while (*tmp){
         if (a_delim == *tmp){
@@ -84,13 +84,13 @@ int readCommand(char* buf, char* result[]){
 
     tokens = buf_split(second_rest, ' '); //<-- wynik tablica wskaznikow char
 
-    printf("Argument: %s\n", first);
+    //printf("Argument: %s\n", first);
 
 
     //COPY TO RESULT
     if(tokens){
         for (i = 0; *(tokens + i); i++){
-            printf("Argument: %s\n", *(tokens + i));
+            //printf("Argument: %s\n", *(tokens + i));
             result[i] = (*(tokens + i));
             //free(*(tokens + i));
         }

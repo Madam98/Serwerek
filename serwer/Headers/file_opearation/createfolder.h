@@ -43,9 +43,9 @@ void createFolder(char* path, char* dirname) {
 }
 
 void connectUser(char* buf, char* user_path){
-    printf("\n");
-    printBreak();
-    printf("Nazwa uzytkownika: %s\n", buf);
+    //printf("\n");
+    //printBreak();
+    //printf("Nazwa uzytkownika: %s\n", buf);
 
     char* path = strdup(user_path);
     strcpy(path, user_path);
@@ -53,12 +53,12 @@ void connectUser(char* buf, char* user_path){
     //char *path = (char *) malloc(strlen(t_data_ptr.path + 1));
     //strcpy(path, t_data_ptr.path);
 
-    printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
+    //printf("Sciezka pliku wykonywanego: \n\t%s\n\n", path);
     //SPRAWDZAMY CZY PODANY UZYTKOWNIK SIE JUZ LOGOWAL I CZY POSIADA FOLDER O PODANEJ NAZWIE
     createFolder(path, buf);
-    printf("Sciezka utworzonego folderu: \n\t%s\n", path);
-    printBreak();
-    printf("\n");
+    printf("Sciezka utworzonego folderu: \t\t \033[1;32m%s\033[0m\n", path);
+    //printBreak();
+    //printf("\n");
 
     //free(path);
 }

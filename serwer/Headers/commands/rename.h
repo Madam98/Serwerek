@@ -16,20 +16,20 @@ void renameCommand(struct clients_struct *client_data, char *arguments[], int si
     strcpy(path, client_data->path);
     strcpy(new_path, client_data->path);
 
-    printBreak();
-    printf("%s\n", path);
+    //printBreak();
+    //printf("%s\n", path);
 
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         //perror("1");
     }
-    printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
-    printf("Na sockecie:\t\t\t %d\n", client_socket);
+    //printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
+    //printf("Na sockecie:\t\t\t %d\n", client_socket);
 
-    printBreak();
-    printf("\n");
+    //printBreak();
+    //printf("\n");
 
-    printBreak();
+    //printBreak();
     strcat(path, "/");
     strcat(new_path, "/");
     int i = 0;
@@ -50,7 +50,7 @@ void renameCommand(struct clients_struct *client_data, char *arguments[], int si
     }
     strcat(path, ".txt");
     strcat(new_path, ".txt");
-    printf("Sciezka zmienianego pliku: \n\t%s\n", path);
+    //printf("Sciezka zmienianego pliku: \n\t%s\n", path);
 
     FILE* file_descriptor = fopen(path, "r");
 
@@ -61,8 +61,10 @@ void renameCommand(struct clients_struct *client_data, char *arguments[], int si
     else{
         char ch;
         FILE* new_file_descriptor = fopen(new_path, "r");
-        printf("Sciezka tworzonego pliku: \n\t%s\n", path);
+        //printf("Sciezka tworzonego pliku: \n\t%s\n", path);
+        green();
         rename(path, new_path);
+        reset();
         printf("Udalo sie ZMIENIC nazwe pliku!\n");
     }
 }

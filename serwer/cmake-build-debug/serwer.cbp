@@ -8,146 +8,149 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug"/>
+				<Option working_dir="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug"/>
+				<Option working_dir="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug"/>
+				<Option working_dir="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serwer">
-				<Option output="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/serwer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug"/>
+				<Option output="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/serwer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/oem/Desktop/16.02/Serwerek/serwer/."/>
+					<Add directory="/home/oem/Desktop/23.02/Serwerek/serwer/."/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 serwer"/>
-					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 serwer"/>
+					<CompileFile command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serwer/fast">
-				<Option output="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/serwer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug"/>
+				<Option output="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/serwer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/oem/Desktop/16.02/Serwerek/serwer/."/>
+					<Add directory="/home/oem/Desktop/23.02/Serwerek/serwer/."/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 serwer/fast"/>
-					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j3 -f &quot;/home/oem/Desktop/16.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 serwer/fast"/>
+					<CompileFile command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j5 -f &quot;/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/arrayfunctions.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/arrayfunctions.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/add.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/add.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/copy.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/copy.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/delete.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/delete.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/enter_file.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/enter_file.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/list.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/list.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/message.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/message.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/rename.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/rename.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/share.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/share.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/commands/touch.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/commands/touch.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/connect_operation/createconnectionfunctions.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/connect_operation/createconnectionfunctions.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/data/structs.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/data/structs.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/data/variables.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/data/variables.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/executecommand.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/executecommand.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/file_opearation/createfolder.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/file_opearation/createfolder.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/file_opearation/msleep.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/file_opearation/msleep.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/file_opearation/readstring.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/file_opearation/readstring.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/file_opearation/textAnimation.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/file_opearation/textAnimation.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/handler/sigsegv.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/handler/sigsegv.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/headers/headers.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/headers/headers.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/Headers/lists.h">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/insertchar.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/main.c">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/Headers/lists.h">
 			<Option target="serwer"/>
 		</Unit>
-		<Unit filename="/home/oem/Desktop/16.02/Serwerek/serwer/CMakeLists.txt">
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/main.c">
+			<Option target="serwer"/>
+		</Unit>
+		<Unit filename="/home/oem/Desktop/23.02/Serwerek/serwer/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

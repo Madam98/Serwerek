@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/oem/Desktop/16.02/Serwerek/serwer/main.c" "CMakeFiles/serwer.dir/main.c.o" "gcc" "CMakeFiles/serwer.dir/main.c.o.d"
+  "/home/oem/Desktop/23.02/Serwerek/serwer/main.c" "CMakeFiles/serwer.dir/main.c.o" "gcc" "CMakeFiles/serwer.dir/main.c.o.d"
   )
 
 # Targets to which this target links.

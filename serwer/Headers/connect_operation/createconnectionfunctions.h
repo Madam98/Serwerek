@@ -4,6 +4,31 @@
 #include <Headers/data/variables.h>
 #include <Headers/data/structs.h>
 
+
+void red () {
+    printf("\033[1;31m");
+}
+
+void green () {
+    printf("\033[1;32m");
+}
+
+void yel () {
+    printf("\033[1;33m");
+}
+
+void blue () {
+    printf("\033[1;34m");
+}
+
+void mag () {
+    printf("\033[1;35m");
+}
+
+void reset () {
+    printf("\033[0m");
+}
+
 void printBreak(){
     printf("----------------------------------------------------------\n");
 }
@@ -41,6 +66,7 @@ void initMutex(struct thread_data_t *t_data_ptr){
 
 
 //-------------------------------------------------------------------------------
+//INIT
 void initAdreessServer(struct sockaddr_in *server_address){
     // Inicjalizacja adresu serwera
     memset(server_address, 0, sizeof(struct sockaddr));    //<---- UWAGA!!! Korci cie aby wrzucic to do maina? Chcesz mocno? Pamietaj aby dopisac & do server_address!!!
@@ -52,6 +78,7 @@ void initAdreessServer(struct sockaddr_in *server_address){
 
 
 //-------------------------------------------------------------------------------
+//SOCKET
 void checkServerSocketDescriptor(int server_socket_descriptor, char* argv){
     if (server_socket_descriptor < 0){
         fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda..\n", argv);
@@ -62,7 +89,10 @@ void checkServerSocketDescriptor(int server_socket_descriptor, char* argv){
 void socketInfo(int server_socket_descriptor){
     printf("\n");
     printBreak();
-    printf("SOCKET zostal poprawnie skonfigurowany\n");
+    yel();
+    printf("SOCKET ");
+    reset();
+    printf("zostal poprawnie skonfigurowany\n");
     printf("server_socket_descriptor:\t %d\n", server_socket_descriptor);
     printf("SOL_SOCKET:\t\t\t\t\t %d\n", SOL_SOCKET);
     printf("SO_REUSEADDR\t\t\t\t %d\n", SO_REUSEADDR);
@@ -73,6 +103,7 @@ void socketInfo(int server_socket_descriptor){
 
 
 //-------------------------------------------------------------------------------
+//BIND
 void checkBindResult(int bind_result, char* argv){
     while (bind_result < 0){
         fprintf(stderr, "%s: Błąd przy próbie dowiązania adresu IP i numeru portu do socketu.\n", argv);
@@ -84,7 +115,10 @@ void checkBindResult(int bind_result, char* argv){
 
 void bindInfo(){
     printBreak();
-    printf("Poprawnie utworzono BIND\n");
+    yel();
+    printf("BIND ");
+    reset();
+    printf("zostal poprawnie skonfigurowany\n");
     printBreak();
     printf("\n");
 }
@@ -92,6 +126,7 @@ void bindInfo(){
 
 
 //-------------------------------------------------------------------------------
+//LISTEN
 void checkListen(int listen_result, char* argv){
     if (listen_result < 0) {
         fprintf(stderr, "%s: Błąd przy próbie ustawienia wielkości kolejki.\n", argv);
@@ -101,7 +136,10 @@ void checkListen(int listen_result, char* argv){
 
 void infoListen(){
     printBreak();
-    printf("Poprawnie utworzono LISTEN\n");
+    yel();
+    printf("LISTEN ");
+    reset();
+    printf("zostal poprawnie utworzony\n");
     printf("QUEUE_SIZE:\t\t\t\t\t %d\n", QUEUE_SIZE);
     printBreak();
     printf("\n");
@@ -110,14 +148,34 @@ void infoListen(){
 
 
 //-------------------------------------------------------------------------------
-int createEpoll(){
+//EPOLL
+void createEpollEvDataServer(int epoll_fd, struct epoll_event event){
+    if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, server_socket_descriptor, &event) == -1) {
+        fprintf(stderr, "Blad epoll_ctl ADD dla serwer socket\n");
+        close(epoll_fd);
+    }
+}
+
+void createEpollEvDataClient(int epoll_fd, struct epoll_event event){
+    if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, 0, &event) == -1) {
+        fprintf(stderr, "Blad epoll_ctl ADD dla serwer socket\n");
+        close(epoll_fd);
+    }
+}
+
+int createEpoll() {
     int epoll_fd = epoll_create1(0);
-    if(epoll_fd == -1){
+    if (epoll_fd == -1) {
+        red();
         fprintf(stderr, "Failed to create epoll file descriptor\n");
-        exit (-1);
+        reset();
+        exit(-1);
     }
     printBreak();
-    printf("Poprawnie stworzono deskryptor EPOLL\n");
+    yel();
+    printf("EPOLL ");
+    reset();
+    printf("zostal poprawnie skonfigurowany\n");
     printf("Epoll deskryptor:\t\t\t %d\n", epoll_fd);
     printBreak();
     printf("\n");

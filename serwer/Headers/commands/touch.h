@@ -15,18 +15,18 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
     char* buf = strdup(client_data->path);
     strcpy(buf, path);
 
-    printBreak();
-    printf("%s\n", buf);
+    //printBreak();
+    //printf("%s\n", buf);
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         //perror();
     }
 
-    printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
-    printBreak();
-    printf("\n");
+    //printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
+    //printBreak();
+    //printf("\n");
 
-    printBreak();
+    //printBreak();
     strcat(buf, "/");
     int i = 0;
     while(arguments[i] != NULL) {
@@ -36,7 +36,7 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
         i++;
     }
     strcat(buf, ".txt");
-    printf("Sciezka tworzonego pliku: \n\t%s\n", buf);
+    //printf("Sciezka tworzonego pliku: \n\t%s\n", buf);
 
     FILE* file_descriptor ;
     file_descriptor = fopen(buf, "r");
@@ -48,9 +48,9 @@ void touchCommand(struct clients_struct *client_data, char *arguments[], int siz
     }
     else{
         file_descriptor = fopen(buf, "w");
-        printf("Utworzono plik o podanej nazwie pod sciezka: \n\t%s\n", buf);
+        printf("Utworzono plik pod sciezka:\t\t\t\033[1;32m%s\033[0m\n", buf);
     }
-    printBreak();
+    //printBreak();
     fclose(file_descriptor);
     free(buf);
 };

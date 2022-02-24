@@ -16,20 +16,20 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
 
     strcpy(path, result);
 
-    printBreak();
-    printf("%s\n", path);
+    //printBreak();
+    //printf("%s\n", path);
 
     //sprawdz czy istnieje glowny folder uzytkownika
     if(ExistsFolder(path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         //perror("1");
     }
-    printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
-    printf("Na sockecie:\t\t\t %d\n", client_socket);
-    printBreak();
-    printf("\n");
+    //printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
+    //printf("Na sockecie:\t\t\t %d\n", client_socket);
+    //printBreak();
+    //printf("\n");
 
-    printBreak();
+    //printBreak();
     strcat(path, "/");
     int i = 0;
     while(arguments[i] != NULL) {
@@ -39,7 +39,7 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
         i++;
     }
     strcat(path, ".txt");
-    printf("Sciezka usuwanego pliku: \n\t%s\n", path);
+    //printf("Sciezka usuwanego pliku: \n\t%s\n", path);
 
     FILE* file_descriptor = fopen(path, "r");
 
@@ -48,9 +48,11 @@ void deleteCommand(struct clients_struct *client_data, char *arguments[], int si
         printf("Podany plik o danej nazwie nie istnieje!\n");
     }
     else{
-        printf("Sciezka istniejacego pliku: \n\t%s\n", path);
+        //printf("Sciezka istniejacego pliku: \n\t%s\n", path);
         remove(path);
+        red();
         printf("USUNIETO PODANY PLIK!\n");
+        reset();
     }
     fclose(file_descriptor);
     free(path);

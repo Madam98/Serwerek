@@ -8,6 +8,7 @@
 #include <Headers/file_opearation/createfolder.h>
 #include <Headers/executecommand.h>
 #include <Headers/lists.h>                //<--- IMPLEMENTACJA LISTY!!! JEEEEEEJ
+#include <Headers/insertchar.h>
 //-----------------------------------------------------------------------------
 /*
 TO DO user commands
@@ -38,32 +39,27 @@ int main(int argc, char* argv[])
 
     //STWORZENIE EPOLL
     memset(&events, 0, sizeof(struct epoll_event));
-    int epoll_fd = createEpoll();
-    event.events = EPOLLIN|EPOLLET;                 //event.events = EPOLLIN;
-    event.data.fd = server_socket_descriptor;
-    if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, server_socket_descriptor, &event) == -1){
-        fprintf(stderr, "Blad epoll_ctl ADD dla serwer socket\n");
-        close(epoll_fd);
-        return 1;
-    }
-    event.data.fd = 0;
-    if(epoll_ctl(epoll_fd, EPOLL_CTL_ADD, 0, &event) == -1){
-        fprintf(stderr, "Blad epoll_ctl ADD dla klawiatury\n");
-        close(epoll_fd);
-        return 1;
-    }
+    int epoll_fd    = createEpoll();
+    //event.events    = EPOLLIN|EPOLLET;                 //event.events = EPOLLIN;
+    event.events    = EPOLLIN;
+    event.data.fd   = server_socket_descriptor;       //<---serwer
+    createEpollEvDataServer(epoll_fd, event);
+    event.data.fd   = 0;
+    createEpollEvDataClient(epoll_fd, event);
 
     //DOWIAZANIE ADRESU SERWERA DO STWORZONEGO GNIAZDA
     struct sigaction action;
     memset(&action, 0, sizeof(struct sigaction));
-    action.sa_flags = SA_SIGINFO;
+    action.sa_flags     = SA_SIGINFO;
     action.sa_sigaction = handler;
     sigaction(SIGSEGV, &action, NULL);
 
     //POWIAZANIE ADRESU Z GNIAZDEM
     bind_result = bind(server_socket_descriptor, (struct sockaddr *) &server_address, sizeof(struct sockaddr));
     while(bind_result == -1) {
+        red();
         printf("Powyzszy port %d jest zajety! Czekam na zwolnienie portu...\n", SERVER_PORT);
+        reset();
         textAnimation();
         bind_result = bind(server_socket_descriptor, (struct sockaddr *) &server_address, sizeof(struct sockaddr));
     }
@@ -75,26 +71,28 @@ int main(int argc, char* argv[])
     checkListen(listen_result, argv[0]);
     infoListen();
 
+    printf("\n\n\n");
+
     //STWORZENIE FOLDERU Z POTENCJLANYMI DOKUMENTAMI(jesli nie istnieja)
     char* path = getenv("PWD");
     char* info = "W folderu z wykonywanym plikiem musi znajdowac sie folder DOCUMENTS\n";
     folderInfo(path, info);
 
-
     //OBSLUGA POLACZEN Z UZYTKOWNIKAMI
     int nfds;
     int i;
     int counter = 0;
-    char temp[MAXLINE];
-    char *wsk_temp = temp;
     int socket_fd;
     ssize_t n;
+    char temp[MAXLINE];
     char line[MAXLINE];
+    char *wsk_temp = temp;
+
 
     while(1){
         nfds = epoll_wait(epoll_fd, events,MAX_EVENTS, -1);
         printBreak();
-        printf("Wskaznik NFDS:\t\t\t\t %d\n", nfds);
+        printf("Wskaznik NFDS:\t\t\t\t\t\t %d\n", nfds);
         for (i = 0; i < nfds; ++i) {
             if (events[i].data.fd == server_socket_descriptor) { //If a new SOCKET user is detected to be connected to a bound SOCKET port, establish a new connection.
                 //---------------------------------
@@ -110,13 +108,18 @@ int main(int argc, char* argv[])
 
                 //---------------------------------
                 char *str = inet_ntoa(clientaddr.sin_addr);
-                printf("accept a connection from\t %s\n", str);
+                printf("Przylaczony klient o ");
+
+                green();
+                printf("DESKRYPTORZE: \t %d\n", client_socket_descriptor);
+                reset();
                 //---------------------------------
 
                 //---------------------------------
-                event.events = EPOLLIN;                 //event.events = EPOLLIN | EPOLLRDHUP;
+                event.events = EPOLLIN|EPOLLRDHUP;                 //event.events = EPOLLIN | EPOLLRDHUP;
+
                 event.data.fd = client_socket_descriptor;
-                printf("Przylaczam client_socket:\t %d\n", client_socket_descriptor);
+                //printf("Przylaczam client_socket:\t %d\n", client_socket_descriptor);
                 if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_socket_descriptor, &event) == -1) {
                     fprintf(stderr, "Blad epoll_ctl ADD dla klawiatury\n");
                     close(epoll_fd);
@@ -132,19 +135,38 @@ int main(int argc, char* argv[])
                 our_clients_data.file_descriptor = 0;
                 our_clients_data.global_path     = path;
                 our_clients_data.FLAG_TO_SENT    = 0;
+                for (i = 0; i < 10; i++){
+                    our_clients_data.share_path[i] = 0;
+                }
+
+                for (i = 0; i < 10; i++){
+                    our_clients_data.send_share_file_descriptor[i] = 0;
+                }
+                //memset(our_clients_data.share_path, 0, 10);
 
                 insertFirst(counter, our_clients_data);
                 counter++;
                 printBreak();
             }
 
+            else if(events[i].events&EPOLLRDHUP){
+                if ((socket_fd = events[i].data.fd) < 0)
+                    continue;
+                printList();
+                red();
+                printf("ZAMYKAM POLACZENIE!!!\n");
+                reset();
+                delete_list(our_clients_data.counter);
+                epoll_ctl(epoll_fd, EPOLL_CTL_DEL, socket_fd, &event);
+            }
+
             else if (events[i].events&EPOLLIN) { //If the user is already connected and receives data, read in.
-                    printf("Event:\t\t\t\t\t\t EPOLLIN\n");
+                    printf("Event:\t\t\t\t\t\t\t\t EPOLLIN\n");
                     memset(line, 0, MAXLINE);
                     memset(temp, 0, MAXLINE);
                     if ((socket_fd = events[i].data.fd) < 0)
                         continue;
-                    printf("Moj socket_fd:\t\t\t\t %d\n", socket_fd);
+                    printf("Socket klienta:\t\t\t\t\t\t %d\n", socket_fd);
                     if ((n = read(socket_fd, line, MAXLINE)) < 0) {
                         if (errno == ECONNRESET) {
                             close(socket_fd);
@@ -164,15 +186,19 @@ int main(int argc, char* argv[])
                     int j;
                     int found;
                     struct node *foundLink;
+                    printList();
                     for (j = 0; j < length(); j++) {
+
+                        //foundLink = find(our_clients_data.counter);
                         foundLink = find(j);
+                        //foundLink = find(events[i].data.fd);
                         if (events[i].data.fd == foundLink->client.client_socket) {
                             found = j;
                             break;
                         }
                     }
-                    printf("ExecuteCommand:\t\t\t\t %d\n", j);
-                    printf("Socket_fd: %d\n", socket_fd);
+                    //printf("ExecuteCommand:\t\t\t\t\t\t %d\n", j);
+                    //printf("Socket_fd: %d\n", socket_fd);
 
                     //-------------------------------------------------------------------------------
                     //struct clients_struct* temp_struct = &our_clients_data[found];
@@ -192,8 +218,9 @@ int main(int argc, char* argv[])
                     //event.events = EPOLLOUT|EPOLLET;
                     //Modify the event to be handled on sockfd to EPOLLOUT
                     //epoll_ctl(epoll_fd, EPOLL_CTL_MOD, socket_fd, &event);
-                    printf("KONIEC EPOLLIN\n");
-                    printf("Socket_fd: %d\n", socket_fd);
+                    //printf("KONIEC EPOLLIN\n");
+                    //printf("Socket_fd: %d\n", socket_fd);
+                    printf("\n\n");
                 }
 
             else if (events[i].events&EPOLLOUT){ //If there is data to send
@@ -202,14 +229,15 @@ int main(int argc, char* argv[])
                 write(socket_fd, line, n);
 
                 //Setting file descriptors for read operations
-                event.data.fd = socket_fd;
+                //event.data.fd = socket_fd;
 
                 //Set Read Action Events for Annotation
-                event.events = EPOLLIN|EPOLLET;
+                //event.events = EPOLLIN|EPOLLET;
 
                 //Modify the event to be processed on sockfd to EPOLIN
-                epoll_ctl(epoll_fd,EPOLL_CTL_MOD,socket_fd,&event);
+                //epoll_ctl(epoll_fd,EPOLL_CTL_MOD,socket_fd,&event);
             }
+
         }
     }
     return(0);

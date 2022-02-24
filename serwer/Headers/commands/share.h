@@ -20,19 +20,19 @@ void shareCommand(struct clients_struct *client_data, char *arguments[], int siz
 
     strcpy(user_path, client_data->global_path);
 
-    printBreak();
-    printf("%s\n", user_path);
+    //printBreak();
+    //printf("%s\n", user_path);
     if(ExistsFolder(user_path) == 1){
         printf("BRAK GLOWNEGO FOLDERU UZYTKOWNIKA!!\n");
         //perror("1");
     }
-    printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
-    printf("Na sockecie:\t\t\t %d\n", client_socket);
+    //printf("Odczytane:\t\t\t\t %s\n", arguments[0]);
+    //printf("Na sockecie:\t\t\t %d\n", client_socket);
 
-    printBreak();
-    printf("\n");
+    //printBreak();
+    //printf("\n");
 
-    printBreak();
+    //printBreak();
     int i = 0;
     while(arguments[i] != NULL && strcmp(arguments[i], ">") != 0 ) {
         strcpy(user, arguments[i]);
@@ -56,21 +56,32 @@ void shareCommand(struct clients_struct *client_data, char *arguments[], int siz
     strcat(user_path, file_name);
 
 
-    printf("Sciezka zmienianego pliku: \n\t%s\n", user_path);
-
+    //printf("Sciezka zmienianego pliku: \n\t%s\n", user_path);
 
     //MUSIMY ZNALEZC UZYTKOWNIKA KTOREMU UDOSTEPNIAMY PLIK A NASTEPNIE WPISAC DESKRYPTOR UZYTKOWNIKA ABY WYSYLAC DO NIEGO INFORMACJE O ZMIANACH W PLIKU
     struct node *foundLink;
-    printf("SZUKAM DANEGO KLIENTA: %d\n", length());
+    //printf("SZUKAM DANEGO KLIENTA: %d\n", length());
+
+    int j;
+    int find_j;
     for (i = 0; i < length(); i++){
         foundLink = find(i);
         if(strcmp(foundLink->client.name, user) == 0) {
-            printf("\nZNALAZLEM KLIENTA\n");
-            printf("%s\n", foundLink->client.name);
+            //printf("\nZNALAZLEM KLIENTA\n");
+            green();
+            printf("UDOSTEPNIAM PLIK KLIENTOWI: \t\t%s\n", foundLink->client.name);
+            reset();
 
-            foundLink->client.share_path = user_path;
+            for(j = 0; j < 10; j++){
+                if (foundLink->client.share_path[j] == 0){
+                    find_j = j;
+                    break;
+                }
+            }
+
+            foundLink->client.share_path[find_j] = user_path;
             foundLink->client.FLAG_TO_SENT = 1;
-            client_data->send_share_file_descriptor = foundLink->client.client_socket;
+            client_data->send_share_file_descriptor[find_j] = foundLink->client.client_socket;
             //strcpy(foundLink->client.share_path, user_path);
         }
     }
