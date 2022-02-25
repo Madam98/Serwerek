@@ -1,4 +1,4 @@
-# Install script for directory: /home/oem/Desktop/Serwerek/klient
+# Install script for directory: /home/adam/Pulpit/Serwerek/klient
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/oem/Desktop/Serwerek/klient/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/adam/Pulpit/Serwerek/klient/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

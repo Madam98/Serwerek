@@ -1,3 +1,3 @@
-/home/oem/Desktop/Serwerek/klient/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/oem/Desktop/Serwerek/klient/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/oem/Desktop/Serwerek/klient/cmake-build-debug/CMakeFiles/klient.dir
+/home/adam/Pulpit/Serwerek/klient/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/adam/Pulpit/Serwerek/klient/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/adam/Pulpit/Serwerek/klient/cmake-build-debug/CMakeFiles/klient.dir

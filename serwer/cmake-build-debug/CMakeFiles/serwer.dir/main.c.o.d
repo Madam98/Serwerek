@@ -1,7 +1,6 @@
-CMakeFiles/serwer.dir/main.c.o: \
- /home/oem/Desktop/23.02/Serwerek/serwer/main.c \
+CMakeFiles/serwer.dir/main.c.o: /home/adam/Pulpit/Serwerek/serwer/main.c \
  /usr/include/stdc-predef.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/headers/headers.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/headers/headers.h \
  /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -133,24 +132,25 @@ CMakeFiles/serwer.dir/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/ucontext.h \
  /usr/include/x86_64-linux-gnu/bits/indirect-return.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/data/variables.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/data/structs.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/file_opearation/readstring.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/file_opearation/textAnimation.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/file_opearation/msleep.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/connect_operation/createconnectionfunctions.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/handler/sigsegv.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/file_opearation/createfolder.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/executecommand.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/add.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/touch.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/share.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/lists.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/data/variables.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/data/structs.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/file_opearation/readstring.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/file_opearation/textAnimation.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/file_opearation/msleep.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/connect_operation/createconnectionfunctions.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/handler/sigsegv.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/file_opearation/createfolder.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/executecommand.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/add.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/touch.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/share.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/lists.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/list.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/delete.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/copy.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/rename.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/enter_file.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/commands/message.h \
- /home/oem/Desktop/23.02/Serwerek/serwer/./Headers/insertchar.h
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/list.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/delete.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/copy.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/rename.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/enter_file.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/commands/message.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/insertchar.h \
+ /home/adam/Pulpit/Serwerek/serwer/./Headers/deletechar.h

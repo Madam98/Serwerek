@@ -48,28 +48,43 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
         char temp[2] = "";
         temp[1] = '\0';
 
-        char message[10];
+        char message[8];
+        char m[10];
         memset(&message[0], 0, sizeof(message));
         int counter = 0;
 
+
         printf("WYSYLAM MESSAGE: ");
         while (c != EOF) {
+            strcpy(m, "m:");
             c = fgetc(file_descriptor);
             temp[0] = c;
             strcat(message, temp);
             counter++;
-
-            if (counter >= 10) {
+            if (counter >= 7) {
                 counter = 0;
-                printf("\n*****\n%s\n*****\n", message);
-                write(client_data->client_socket, c, 10);
+                strcat(m, message);
+                strcat(m, "\n");
+                printf("\n*****\n%s\n*****\n", m);
+                write(client_data->client_socket, m, 10);
                 memset(&message[0], 0, sizeof(message));
+                memset(&m, 0, sizeof(m));
             }
         }
+        strcpy(m, "m:");
         if (message != NULL) {
-            printf("\n*****\n%s\n*****\n", message);
-            write(client_data->client_socket, c, strlen(message));
+            strcat(m, message);
+            strcat(m, "\n");
+            printf("\n*****\n%s\n*****\n", m);
+            write(client_data->client_socket, m, 10);
+            memset(&message[0], 0, sizeof(message));
+            memset(&m, 0, sizeof(m));
+            strcpy(m, "m:");
         }
+
+        char end_m[6] = "m:EOF\n";
+        printf("%s", end_m);
+        write(client_data->client_socket, end_m, 6);
 
         /*
         if (file_descriptor > 0) {
@@ -81,6 +96,7 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
         }
         */
 
+        strcpy(client_data->enter_path, buf);
         printBreak();
         free(buf);
     }
@@ -119,7 +135,7 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
 
         //strcpy(client_data->open_file_descriptor_path, buf);
         FILE *file_descriptor;
-        file_descriptor = fopen("/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/DOCUMENTS/adam/1.txt", "rw+");
+        file_descriptor = fopen(client_data->share_path, "rw+");
 
 
         //WYSYLAMY PLIK UZYTKOWNIKOWI
@@ -131,24 +147,39 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
         memset(&message[0], 0, sizeof(message));
         int counter = 0;
 
+        char m[10];
         printf("WYSYLAM MESSAGE: ");
         while (c != EOF) {
+            strcpy(m, "m:");
             c = fgetc(file_descriptor);
             temp[0] = c;
             strcat(message, temp);
             counter++;
 
-            if (counter >= 10) {
+            if (counter >= 7) {
                 counter = 0;
-                printf("\n*****\n%s\n*****\n", message);
-                write(client_data->client_socket, c, 10);
+                strcat(m, message);
+                strcat(m, "\n");
+                printf("\n*****\n%s\n*****\n", m);
+                write(client_data->client_socket, m, 10);
                 memset(&message[0], 0, sizeof(message));
+                memset(&m, 0, sizeof(m));
             }
         }
+        strcpy(m, "m:");
         if (message != NULL) {
-            printf("\n*****\n%s\n*****\n", message);
-            write(client_data->client_socket, c, strlen(message));
+            strcat(m, message);
+            strcat(m, "\n");
+            printf("\n*****\n%s\n*****\n", m);
+            write(client_data->client_socket, m, 10);
+            memset(&message[0], 0, sizeof(message));
+            memset(&m, 0, sizeof(m));
+            strcpy(m, "m:");
         }
+
+        char end_m[6] = "m:EOF\n";
+        printf("%s", end_m);
+        write(client_data->client_socket, end_m, 6);
 
         /*
         if (file_descriptor > 0) {
@@ -161,6 +192,7 @@ void enter_file(struct clients_struct *client_data, char *arguments[], int size_
         */
 
 
+        strcpy(client_data->enter_path, client_data->share_path);
 
         printBreak();
         //free(buf);

@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Desktop/Serwerek/klient/cmake-build-debug"
+			"value" : "/home/adam/Pulpit/Serwerek/klient/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-j3"
+			"value" : "-j12"
 		},
 		{
 			"name" : "CMAKE_COLOR_MAKEFILE",
@@ -155,7 +155,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Downloads/clion-2021.3.2/bin/cmake/linux/bin/cmake"
+			"value" : "/home/adam/Pulpit/clion-2021.3.3/bin/cmake/linux/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -167,7 +167,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Downloads/clion-2021.3.2/bin/cmake/linux/bin/cpack"
+			"value" : "/home/adam/Pulpit/clion-2021.3.3/bin/cmake/linux/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -179,7 +179,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Downloads/clion-2021.3.2/bin/cmake/linux/bin/ctest"
+			"value" : "/home/adam/Pulpit/clion-2021.3.3/bin/cmake/linux/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Desktop/Serwerek/klient"
+			"value" : "/home/adam/Pulpit/Serwerek/klient"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -863,7 +863,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/oem/Downloads/clion-2021.3.2/bin/cmake/linux/share/cmake-3.21"
+			"value" : "/home/adam/Pulpit/clion-2021.3.3/bin/cmake/linux/share/cmake-3.21"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1155,7 +1155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/oem/Desktop/Serwerek/klient/cmake-build-debug"
+			"value" : "/home/adam/Pulpit/Serwerek/klient/cmake-build-debug"
 		},
 		{
 			"name" : "klient_IS_TOP_LEVEL",
@@ -1179,7 +1179,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/oem/Desktop/Serwerek/klient"
+			"value" : "/home/adam/Pulpit/Serwerek/klient"
 		}
 	],
 	"kind" : "cache",

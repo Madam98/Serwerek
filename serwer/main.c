@@ -9,6 +9,7 @@
 #include <Headers/executecommand.h>
 #include <Headers/lists.h>                //<--- IMPLEMENTACJA LISTY!!! JEEEEEEJ
 #include <Headers/insertchar.h>
+#include <Headers/deletechar.h>
 //-----------------------------------------------------------------------------
 /*
 TO DO user commands
@@ -135,13 +136,14 @@ int main(int argc, char* argv[])
                 our_clients_data.file_descriptor = 0;
                 our_clients_data.global_path     = path;
                 our_clients_data.FLAG_TO_SENT    = 0;
+                /*
                 for (i = 0; i < 10; i++){
                     our_clients_data.share_path[i] = 0;
                 }
 
                 for (i = 0; i < 10; i++){
                     our_clients_data.send_share_file_descriptor[i] = 0;
-                }
+                }*/
                 //memset(our_clients_data.share_path, 0, 10);
 
                 insertFirst(counter, our_clients_data);
@@ -153,6 +155,7 @@ int main(int argc, char* argv[])
                 if ((socket_fd = events[i].data.fd) < 0)
                     continue;
                 printList();
+                printf("\n");
                 red();
                 printf("ZAMYKAM POLACZENIE!!!\n");
                 reset();
@@ -187,6 +190,7 @@ int main(int argc, char* argv[])
                     int found;
                     struct node *foundLink;
                     printList();
+                    printf("\n");
                     for (j = 0; j < length(); j++) {
 
                         //foundLink = find(our_clients_data.counter);

@@ -91,6 +91,7 @@ void ExecuteCommand(char* user_message, int client_socket, struct clients_struct
                 printf("KOMENDA: MESSAGE\n");
                 message(client_data, arguments, size_of_array);
                 break;
+
             // ***********************
             default:
                 printf("KOMENDA: NIEZNANA :-(\n");

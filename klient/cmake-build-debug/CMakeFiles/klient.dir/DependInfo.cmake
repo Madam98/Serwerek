@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/oem/Desktop/Serwerek/klient/client.c" "CMakeFiles/klient.dir/client.c.o" "gcc" "CMakeFiles/klient.dir/client.c.o.d"
+  "/home/adam/Pulpit/Serwerek/klient/client.c" "CMakeFiles/klient.dir/client.c.o" "gcc" "CMakeFiles/klient.dir/client.c.o.d"
   )
 
 # Targets to which this target links.

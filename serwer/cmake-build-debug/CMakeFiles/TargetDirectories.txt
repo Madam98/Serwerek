@@ -1,3 +1,3 @@
-/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/oem/Desktop/23.02/Serwerek/serwer/cmake-build-debug/CMakeFiles/serwer.dir
+/home/adam/Pulpit/Serwerek/serwer/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/adam/Pulpit/Serwerek/serwer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/adam/Pulpit/Serwerek/serwer/cmake-build-debug/CMakeFiles/serwer.dir

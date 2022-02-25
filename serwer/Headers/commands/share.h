@@ -33,6 +33,7 @@ void shareCommand(struct clients_struct *client_data, char *arguments[], int siz
     //printf("\n");
 
     //printBreak();
+
     int i = 0;
     while(arguments[i] != NULL && strcmp(arguments[i], ">") != 0 ) {
         strcpy(user, arguments[i]);
@@ -72,16 +73,10 @@ void shareCommand(struct clients_struct *client_data, char *arguments[], int siz
             printf("UDOSTEPNIAM PLIK KLIENTOWI: \t\t%s\n", foundLink->client.name);
             reset();
 
-            for(j = 0; j < 10; j++){
-                if (foundLink->client.share_path[j] == 0){
-                    find_j = j;
-                    break;
-                }
-            }
-
-            foundLink->client.share_path[find_j] = user_path;
+            strcpy(foundLink->client.share_path, user_path);
+            foundLink->client.send_owner_file_descriptor = client_data->client_socket;
             foundLink->client.FLAG_TO_SENT = 1;
-            client_data->send_share_file_descriptor[find_j] = foundLink->client.client_socket;
+            client_data->send_share_file_descriptor = foundLink->client.client_socket;
             //strcpy(foundLink->client.share_path, user_path);
         }
     }

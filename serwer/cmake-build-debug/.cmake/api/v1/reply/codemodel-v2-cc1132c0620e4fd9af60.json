@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "klient",
+					"name" : "serwer",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "klient::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-klient-Debug-c3667dfef08434196901.json",
-					"name" : "klient",
+					"id" : "serwer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-serwer-Debug-a866b7f3225a62b63501.json",
+					"name" : "serwer",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/oem/Desktop/Serwerek/klient/cmake-build-debug",
-		"source" : "/home/oem/Desktop/Serwerek/klient"
+		"build" : "/home/adam/Pulpit/Serwerek/serwer/cmake-build-debug",
+		"source" : "/home/adam/Pulpit/Serwerek/serwer"
 	},
 	"version" : 
 	{

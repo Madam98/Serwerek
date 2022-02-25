@@ -180,8 +180,11 @@ CMakeFiles/serwer.dir/main.c.o: ../main.c \
   ../Headers/commands/rename.h \
   ../Headers/commands/enter_file.h \
   ../Headers/commands/message.h \
-  ../Headers/insertchar.h
+  ../Headers/insertchar.h \
+  ../Headers/deletechar.h
 
+
+../Headers/deletechar.h:
 
 ../Headers/commands/enter_file.h:
 
