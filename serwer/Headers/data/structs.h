@@ -43,6 +43,8 @@ struct user_data
 
 struct clients_struct
 {
+    int     FLAG_DELETED;
+
     int     client_socket;
     char*   name;
     char*   path;

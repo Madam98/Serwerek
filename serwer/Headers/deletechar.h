@@ -47,13 +47,14 @@ int fdelete (FILE* file) {
         total_left_to_move -= ammount_to_move;
 
         if (!total_left_to_move) break;
-
     }
 
     seek_ret = fseek(file, insert_pos, SEEK_SET);
     if (seek_ret) return seek_ret;
     //fwrite(buffer, ammount_to_grow, 1, file);
     if (ferror(file)) return ferror(file);
+
+
 
     return 0;
 }

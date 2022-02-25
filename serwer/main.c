@@ -136,6 +136,7 @@ int main(int argc, char* argv[])
                 our_clients_data.file_descriptor = 0;
                 our_clients_data.global_path     = path;
                 our_clients_data.FLAG_TO_SENT    = 0;
+                our_clients_data.FLAG_DELETED    = 0;
                 /*
                 for (i = 0; i < 10; i++){
                     our_clients_data.share_path[i] = 0;
@@ -159,7 +160,24 @@ int main(int argc, char* argv[])
                 red();
                 printf("ZAMYKAM POLACZENIE!!!\n");
                 reset();
-                delete_list(our_clients_data.counter);
+
+                int j;
+                int found;
+                struct node *foundLink;
+                printList();
+                printf("\n");
+                for (j = 0; j < length(); j++) {
+
+                    //foundLink = find(our_clients_data.counter);
+                    foundLink = find(j);
+                    //foundLink = find(events[i].data.fd);
+                    if (events[i].data.fd == foundLink->client.client_socket) {
+                        found = j;
+                        break;
+                    }
+                }
+                foundLink->client.FLAG_DELETED = 1;
+                //delete_list(our_clients_data.counter);
                 epoll_ctl(epoll_fd, EPOLL_CTL_DEL, socket_fd, &event);
             }
 

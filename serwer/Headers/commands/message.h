@@ -24,6 +24,9 @@ void message(struct clients_struct *client_data, char *arguments[], int size_of_
     if(strcmp(arguments[2], "SPACE") == 0){
         strcpy(client_char, " ");
     }
+    else if (strcmp(arguments[2], "ENTER") == 0) {
+        strcpy(client_char, "\n");
+    }
     else {
         strcpy(client_char, arguments[2]);
     }

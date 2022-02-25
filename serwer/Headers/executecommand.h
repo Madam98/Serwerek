@@ -67,8 +67,10 @@ void ExecuteCommand(char* user_message, int client_socket, struct clients_struct
                 shareCommand(client_data, arguments, size_of_array);
                 break;
             case 3:
-                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mLIST\033[0m\n");
-                //listCommand(user);
+                printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mLIST_CLIENT\033[0m\n");
+                listCommand(client_data, arguments, size_of_array);
+
+
                 break;
             case 4:
                 printf("KOMENDA:\t\t\t\t\t\t\t \033[1;32mDELETE\033[0m\n");
@@ -135,12 +137,12 @@ int ShowClients() {
     printBreak();
     struct node *foundLink;
     blue();
-    printf("ILOSC KLIENTOW: %d\n", length());
+    printf("ILOSC LOGOWAN: %d\n", length());
     reset();
     //printf("KLIENCI\n");
     for (i = 0; i < length(); i++){
         foundLink = find(i);
-        if(foundLink->client.client_socket != 0) {
+        if(foundLink->client.FLAG_DELETED != 1) {
             printf("\n");
             printf("Nazwa klienta:\t\t\t %s\n", foundLink->client.name);
             printf("Numer socketa:\t\t\t %d\n", foundLink->client.client_socket);
